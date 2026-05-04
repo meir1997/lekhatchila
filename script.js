@@ -36,6 +36,39 @@ if ('IntersectionObserver' in window) {
     revealTargets.forEach(el => el.classList.add('is-visible'));
 }
 
+// Reveal join form when CTA clicked (in-section button or hero "הצטרפות")
+(function () {
+    const form = document.getElementById('joinForm');
+    const cta = document.getElementById('openJoinForm');
+    const ctaWrap = document.querySelector('.join-cta');
+    const heroJoin = document.querySelector('.hero-cta a[href="#join"]');
+    if (!form || !cta) return;
+
+    function revealForm({ scroll = true, focusFirst = true } = {}) {
+        if (form.hidden) {
+            form.hidden = false;
+            if (ctaWrap) ctaWrap.style.display = 'none';
+        }
+        if (scroll) {
+            form.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+        if (focusFirst) {
+            const first = form.querySelector('input, textarea');
+            // Delay focus until after smooth scroll begins, on mobile keyboards
+            setTimeout(() => first && first.focus({ preventScroll: true }), scroll ? 500 : 0);
+        }
+    }
+
+    cta.addEventListener('click', () => revealForm());
+
+    if (heroJoin) {
+        heroJoin.addEventListener('click', (e) => {
+            e.preventDefault();
+            revealForm();
+        });
+    }
+})();
+
 // Join form — submit to Google Forms backend
 (function () {
     const form = document.getElementById('joinForm');

@@ -297,6 +297,15 @@ a:hover { text-decoration: underline; }
 .join-lead { font-size: 1.1rem; opacity: 0.92; max-width: 580px; margin: 0 auto; }
 .kicker-light { color: var(--gold); }
 
+.join-cta {
+    margin-top: 36px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+.join-note { margin: 0; font-size: 0.88rem; opacity: 0.7; color: #f5f7fb; }
+
 .join-form {
     background: rgba(255, 255, 255, 0.04);
     border: 1px solid rgba(255, 255, 255, 0.12);
@@ -304,6 +313,14 @@ a:hover { text-decoration: underline; }
     padding: clamp(24px, 4vw, 44px);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
+    animation: formSlideIn 0.45s ease both;
+    margin-top: 12px;
+}
+.join-form[hidden] { display: none; }
+
+@keyframes formSlideIn {
+    from { opacity: 0; transform: translateY(-12px); }
+    to   { opacity: 1; transform: translateY(0); }
 }
 
 .form-grid { display: flex; flex-direction: column; gap: 32px; }
