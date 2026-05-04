@@ -19,7 +19,7 @@ const yearEl = document.getElementById('year');
 if (yearEl) yearEl.textContent = new Date().getFullYear();
 
 // Scroll reveal
-const revealTargets = document.querySelectorAll('.section-head, .card, .goals-list li, .form-group');
+const revealTargets = document.querySelectorAll('.section-head, .card, .goals-list li, .join-head');
 revealTargets.forEach(el => el.classList.add('reveal'));
 
 if ('IntersectionObserver' in window) {
@@ -35,106 +35,3 @@ if ('IntersectionObserver' in window) {
 } else {
     revealTargets.forEach(el => el.classList.add('is-visible'));
 }
-
-// Reveal join form when CTA clicked (in-section button or hero "הצטרפות")
-(function () {
-    const form = document.getElementById('joinForm');
-    const cta = document.getElementById('openJoinForm');
-    const ctaWrap = document.querySelector('.join-cta');
-    const heroJoin = document.querySelector('.hero-cta a[href="#join"]');
-    if (!form || !cta) return;
-
-    function revealForm({ scroll = true, focusFirst = true } = {}) {
-        if (form.hidden) {
-            form.hidden = false;
-            if (ctaWrap) ctaWrap.style.display = 'none';
-        }
-        if (scroll) {
-            form.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-        if (focusFirst) {
-            const first = form.querySelector('input, textarea');
-            // Delay focus until after smooth scroll begins, on mobile keyboards
-            setTimeout(() => first && first.focus({ preventScroll: true }), scroll ? 500 : 0);
-        }
-    }
-
-    cta.addEventListener('click', () => revealForm());
-
-    if (heroJoin) {
-        heroJoin.addEventListener('click', (e) => {
-            e.preventDefault();
-            revealForm();
-        });
-    }
-})();
-
-// Join form — submit to Google Forms backend
-(function () {
-    const form = document.getElementById('joinForm');
-    if (!form) return;
-
-    const FORM_ACTION = 'https://docs.google.com/forms/d/e/1FAIpQLSf9Df2_dqLbGU6WtCn6fNhIQeL3EwhCqGLJHprdpQD4Z6SWTA/formResponse';
-    const DATE_ENTRY  = 'entry.217176796'; // תאריך לידה — date split into _year/_month/_day
-
-    const status = form.querySelector('.form-status');
-    const submitBtn = form.querySelector('button[type="submit"]');
-
-    form.addEventListener('submit', async (e) => {
-        e.preventDefault();
-
-        if (!form.checkValidity()) {
-            form.reportValidity();
-            return;
-        }
-
-        // Build URL-encoded body manually so checkbox arrays send multiple values
-        const body = new URLSearchParams();
-        // Skip the local "birthdate" field — split it into 3 sub-fields
-        const formData = new FormData(form);
-        for (const [name, value] of formData.entries()) {
-            if (!value) continue;
-            if (name === 'birthdate') {
-                // value is YYYY-MM-DD
-                const [year, month, day] = value.split('-');
-                if (year && month && day) {
-                    body.append(`${DATE_ENTRY}_year`, year);
-                    body.append(`${DATE_ENTRY}_month`, String(parseInt(month, 10)));
-                    body.append(`${DATE_ENTRY}_day`, String(parseInt(day, 10)));
-                }
-                continue;
-            }
-            body.append(name, value);
-        }
-
-        submitBtn.disabled = true;
-        const originalLabel = submitBtn.querySelector('.btn-label').textContent;
-        submitBtn.querySelector('.btn-label').textContent = 'שולח...';
-        status.className = 'form-status';
-        status.textContent = '';
-
-        try {
-            await fetch(FORM_ACTION, {
-                method: 'POST',
-                mode: 'no-cors',
-                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                body: body.toString(),
-            });
-            // no-cors gives an opaque response — we can't read status, but submission succeeded if no network error
-            status.className = 'form-status is-success';
-            status.textContent = 'תודה! ההרשמה התקבלה. נחזור אליך בקרוב.';
-            form.reset();
-            submitBtn.querySelector('.btn-label').textContent = 'נשלח ✓';
-            setTimeout(() => {
-                submitBtn.disabled = false;
-                submitBtn.querySelector('.btn-label').textContent = originalLabel;
-            }, 4000);
-        } catch (err) {
-            console.error('Form submit failed', err);
-            status.className = 'form-status is-error';
-            status.textContent = 'אירעה שגיאה. נסו שוב או שלחו לנו מייל.';
-            submitBtn.disabled = false;
-            submitBtn.querySelector('.btn-label').textContent = originalLabel;
-        }
-    });
-})();

@@ -502,6 +502,73 @@ a:hover { text-decoration: underline; }
 .form-status.is-success { color: #8ce0a8; font-weight: 600; }
 .form-status.is-error { color: #ff8a8a; }
 
+/* ---------- Dedicated Join page ---------- */
+.join-page main { min-height: calc(100vh - 200px); }
+.join-section { padding-top: clamp(60px, 9vw, 110px); }
+.join-page .site-footer { background: #0a1d33; }
+
+/* Thank-you view */
+.thanks-view {
+    text-align: center;
+    max-width: 640px;
+    margin: 0 auto;
+    padding: clamp(40px, 8vw, 80px) 24px;
+    color: #f5f7fb;
+    animation: thanksFade 0.6s ease both;
+}
+@keyframes thanksFade {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+.thanks-icon {
+    color: var(--gold);
+    margin-bottom: 20px;
+    animation: thanksPop 0.6s 0.1s ease both;
+}
+@keyframes thanksPop {
+    0%   { transform: scale(0.4); opacity: 0; }
+    70%  { transform: scale(1.1); opacity: 1; }
+    100% { transform: scale(1); }
+}
+.thanks-icon svg path { stroke-dasharray: 50; stroke-dashoffset: 50; animation: thanksDraw 0.5s 0.5s ease forwards; }
+@keyframes thanksDraw { to { stroke-dashoffset: 0; } }
+
+.thanks-title {
+    font-family: var(--serif);
+    font-size: clamp(2.2rem, 5vw, 3.2rem);
+    font-weight: 900;
+    margin: 0 0 18px;
+    color: white;
+    letter-spacing: -0.01em;
+}
+.thanks-lead {
+    font-size: 1.15rem;
+    color: #e6ebf5;
+    margin: 0 0 14px;
+    line-height: 1.7;
+}
+.thanks-lead #thanksName { color: var(--gold); font-weight: 600; }
+.thanks-sub {
+    font-size: 0.98rem;
+    color: #b6c2d7;
+    margin: 0 0 32px;
+}
+.thanks-actions {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.btn-ghost-light {
+    background: transparent;
+    color: #f5f7fb;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+.btn-ghost-light:hover {
+    background: rgba(255, 255, 255, 0.08);
+    text-decoration: none;
+}
+
 /* ---------- Footer ---------- */
 .site-footer {
     background: #0a1d33;

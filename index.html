@@ -42,7 +42,7 @@
                     שותפות אמיתית בחברה הישראלית — מתוך נאמנות לתורה ומתוך אחריות למדינה.
                 </p>
                 <div class="hero-cta">
-                    <a href="#join" class="btn btn-primary">הצטרפות לתנועה</a>
+                    <a href="join.html" class="btn btn-primary">הצטרפות לתנועה</a>
                     <a href="#torah" class="btn btn-ghost">קראו על העקרונות</a>
                 </div>
             </div>
@@ -152,7 +152,7 @@
         </section>
 
         <section id="join" class="section section-dark">
-            <div class="container join-container">
+            <div class="container join-container join-cta-only">
                 <div class="join-head">
                     <span class="kicker kicker-light">הצטרפות לתנועה</span>
                     <h2>מצטרפים אלינו</h2>
@@ -160,112 +160,16 @@
                         אנחנו בונים תנועה של אנשים, קהילות ומשפחות. מלאו את הטופס ונהיה בקשר.
                     </p>
                     <div class="join-cta">
-                        <button type="button" id="openJoinForm" class="btn btn-join">
+                        <a href="join.html" class="btn btn-join">
                             <span class="btn-label">למילוי טופס ההצטרפות</span>
                             <span class="btn-arrow" aria-hidden="true">←</span>
-                        </button>
+                        </a>
                         <p class="join-note">לוקח דקה</p>
                     </div>
                 </div>
-
-                <form id="joinForm" class="join-form" hidden novalidate>
-                    <div class="form-grid">
-                        <fieldset class="form-group">
-                            <legend>פרטים אישיים</legend>
-                            <div class="form-row form-row-2">
-                                <label class="field">
-                                    <span class="field-label">שם פרטי <em>*</em></span>
-                                    <input type="text" name="entry.1166605822" required autocomplete="given-name">
-                                </label>
-                                <label class="field">
-                                    <span class="field-label">שם משפחה <em>*</em></span>
-                                    <input type="text" name="entry.297252713" required autocomplete="family-name">
-                                </label>
-                            </div>
-                            <div class="form-row form-row-2">
-                                <label class="field">
-                                    <span class="field-label">תאריך לידה <em>*</em></span>
-                                    <input type="date" name="birthdate" required>
-                                </label>
-                                <label class="field">
-                                    <span class="field-label">עיר מגורים <em>*</em></span>
-                                    <input type="text" name="entry.173277209" required autocomplete="address-level2">
-                                </label>
-                            </div>
-                            <label class="field">
-                                <span class="field-label">כתובת מגורים</span>
-                                <input type="text" name="entry.979623476" autocomplete="street-address">
-                            </label>
-                        </fieldset>
-
-                        <fieldset class="form-group">
-                            <legend>איך נשמור על קשר</legend>
-                            <div class="form-row form-row-2">
-                                <label class="field">
-                                    <span class="field-label">נייד <em>*</em></span>
-                                    <input type="tel" name="entry.1042966516" required autocomplete="tel" placeholder="050-1234567">
-                                </label>
-                                <label class="field">
-                                    <span class="field-label">דוא״ל <em>*</em></span>
-                                    <input type="email" name="entry.312878262" required autocomplete="email" placeholder="name@example.com">
-                                </label>
-                            </div>
-                            <div class="field">
-                                <span class="field-label">אשמח לקבל עדכונים</span>
-                                <div class="checkbox-group" role="group">
-                                    <label class="check"><input type="checkbox" name="entry.575929767" value="בדוא&quot;ל"><span>בדוא״ל</span></label>
-                                    <label class="check"><input type="checkbox" name="entry.575929767" value="בוואטסאפ"><span>בוואטסאפ</span></label>
-                                    <label class="check"><input type="checkbox" name="entry.575929767" value="בקבוצת וואטסאפ"><span>בקבוצת וואטסאפ</span></label>
-                                </div>
-                            </div>
-                        </fieldset>
-
-                        <fieldset class="form-group">
-                            <legend>איך אני יכול לסייע</legend>
-                            <div class="checkbox-group" role="group">
-                                <label class="check"><input type="checkbox" name="entry.1110911704" value="אירוח חוג בית"><span>אירוח חוג בית</span></label>
-                                <label class="check"><input type="checkbox" name="entry.1110911704" value="השתתפות בקבוצת חשיבה"><span>השתתפות בקבוצת חשיבה</span></label>
-                                <label class="check"><input type="checkbox" name="entry.1110911704" value="פרסום על התנועה"><span>פרסום על התנועה</span></label>
-                                <label class="check"><input type="checkbox" name="entry.1110911704" value="צירוף חברים"><span>צירוף חברים</span></label>
-                            </div>
-                        </fieldset>
-
-                        <fieldset class="form-group">
-                            <legend>התחומים שחשובים לי</legend>
-                            <div class="checkbox-group checkbox-group-3" role="group">
-                                <label class="check"><input type="checkbox" name="entry.1727193585" value="חינוך"><span>חינוך</span></label>
-                                <label class="check"><input type="checkbox" name="entry.1727193585" value="תעסוקה"><span>תעסוקה</span></label>
-                                <label class="check"><input type="checkbox" name="entry.1727193585" value="השכלה"><span>השכלה</span></label>
-                                <label class="check"><input type="checkbox" name="entry.1727193585" value="מעמד האישה"><span>מעמד האישה</span></label>
-                                <label class="check"><input type="checkbox" name="entry.1727193585" value="צדק ושוויון"><span>צדק ושוויון</span></label>
-                                <label class="check"><input type="checkbox" name="entry.1727193585" value="מאבק בשחיתות"><span>מאבק בשחיתות</span></label>
-                                <label class="check"><input type="checkbox" name="entry.1727193585" value="מאבק באפליה"><span>מאבק באפליה</span></label>
-                                <label class="check"><input type="checkbox" name="entry.1727193585" value="תקשורת"><span>תקשורת</span></label>
-                                <label class="check"><input type="checkbox" name="entry.1727193585" value="דת ומדינה"><span>דת ומדינה</span></label>
-                                <label class="check"><input type="checkbox" name="entry.1727193585" value="דיאלוג עם החברה הישראלית"><span>דיאלוג עם החברה הישראלית</span></label>
-                                <label class="check"><input type="checkbox" name="entry.1727193585" value="אזרחות חרדית"><span>אזרחות חרדית</span></label>
-                            </div>
-                        </fieldset>
-
-                        <fieldset class="form-group">
-                            <legend>שיתוף נוסף</legend>
-                            <label class="field">
-                                <span class="field-label">הצעות, מחשבות, הערות והארות</span>
-                                <textarea name="entry.1150363751" rows="4" placeholder="אשמח לשמוע כל מה שעל לבכם"></textarea>
-                            </label>
-                        </fieldset>
-                    </div>
-
-                    <div class="form-actions">
-                        <button type="submit" class="btn btn-join">
-                            <span class="btn-label">שליחה</span>
-                            <span class="btn-arrow" aria-hidden="true">←</span>
-                        </button>
-                        <p class="form-status" role="status" aria-live="polite"></p>
-                    </div>
-                </form>
             </div>
         </section>
+
     </main>
 
     <footer class="site-footer">
