@@ -19,7 +19,7 @@ const yearEl = document.getElementById('year');
 if (yearEl) yearEl.textContent = new Date().getFullYear();
 
 // Scroll reveal
-const revealTargets = document.querySelectorAll('.section-head, .card, .goals-list li, .join-form');
+const revealTargets = document.querySelectorAll('.section-head, .card, .goals-list li, .btn-join');
 revealTargets.forEach(el => el.classList.add('reveal'));
 
 if ('IntersectionObserver' in window) {
@@ -36,30 +36,3 @@ if ('IntersectionObserver' in window) {
     revealTargets.forEach(el => el.classList.add('is-visible'));
 }
 
-// Join form — simple mailto handoff for now (no backend yet)
-function handleJoin(event) {
-    event.preventDefault();
-    const form = event.target;
-    const status = form.querySelector('.form-status');
-    const data = new FormData(form);
-    const name = (data.get('name') || '').toString().trim();
-    const email = (data.get('email') || '').toString().trim();
-    const phone = (data.get('phone') || '').toString().trim();
-    const message = (data.get('message') || '').toString().trim();
-
-    const body = [
-        `שם: ${name}`,
-        `דוא״ל: ${email}`,
-        phone ? `טלפון: ${phone}` : null,
-        '',
-        message,
-    ].filter(Boolean).join('\n');
-
-    const subject = encodeURIComponent('הצטרפות לתנועת לכתחילה');
-    const mailto = `mailto:info@lekhatchila.co.il?subject=${subject}&body=${encodeURIComponent(body)}`;
-
-    status.textContent = 'תודה! פותחים עבורך את תוכנת המייל לשליחת הפנייה.';
-    window.location.href = mailto;
-    return false;
-}
-window.handleJoin = handleJoin;

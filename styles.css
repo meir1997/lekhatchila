@@ -293,50 +293,40 @@ a:hover { text-decoration: underline; }
 
 /* ---------- Join form ---------- */
 .join-container { max-width: 720px; margin: 0 auto; text-align: center; }
-.join-lead { font-size: 1.1rem; margin-bottom: 36px; opacity: 0.92; }
+.join-lead { font-size: 1.15rem; margin-bottom: 36px; opacity: 0.92; }
 
-.join-form {
-    text-align: right;
-    background: rgba(255, 255, 255, 0.06);
-    padding: 32px;
-    border-radius: var(--radius);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(6px);
-    display: flex;
-    flex-direction: column;
-    gap: 18px;
+.btn-join {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 18px 38px;
+    border-radius: 999px;
+    background: var(--gold);
+    color: #0a1d33;
+    font-size: 1.1rem;
+    font-weight: 700;
+    box-shadow: 0 10px 30px rgba(184, 146, 74, 0.35);
+    transition: transform 0.15s, box-shadow 0.2s, background 0.2s;
 }
+.btn-join:hover {
+    background: #d2a85a;
+    transform: translateY(-2px);
+    box-shadow: 0 14px 34px rgba(184, 146, 74, 0.5);
+    text-decoration: none;
+}
+.btn-join .btn-arrow {
+    display: inline-block;
+    transition: transform 0.2s;
+    font-size: 1.2em;
+}
+.btn-join:hover .btn-arrow { transform: translateX(-4px); }
 
-.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
-
-.join-form label {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    font-size: 0.92rem;
-    font-weight: 500;
+.join-note {
+    margin-top: 16px;
+    font-size: 0.85rem;
+    opacity: 0.7;
     color: #f5f7fb;
 }
-.join-form input, .join-form textarea {
-    width: 100%;
-    padding: 12px 14px;
-    border-radius: 10px;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    background: rgba(255, 255, 255, 0.95);
-    color: var(--ink);
-    font-family: inherit;
-    font-size: 1rem;
-    transition: border-color 0.2s, box-shadow 0.2s;
-}
-.join-form input:focus, .join-form textarea:focus {
-    outline: none;
-    border-color: var(--gold);
-    box-shadow: 0 0 0 3px rgba(184, 146, 74, 0.3);
-}
-
-.join-form .btn { align-self: center; min-width: 160px; }
-
-.form-status { text-align: center; margin: 0; min-height: 1.4em; font-size: 0.95rem; }
 
 /* ---------- Footer ---------- */
 .site-footer {
