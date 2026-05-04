@@ -329,6 +329,8 @@ a:hover { text-decoration: underline; }
     border: 0;
     padding: 0;
     margin: 0;
+    min-inline-size: 0; /* Reset fieldset's min-content default that breaks grids */
+    inline-size: 100%;
 }
 .form-group legend {
     font-family: var(--serif);
@@ -342,7 +344,7 @@ a:hover { text-decoration: underline; }
 
 .form-row { display: flex; flex-direction: column; gap: 16px; margin-bottom: 16px; }
 .form-row:last-child { margin-bottom: 0; }
-.form-row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.form-row-2 { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 16px; }
 @media (max-width: 640px) {
     .form-row-2 { grid-template-columns: 1fr; }
 }
