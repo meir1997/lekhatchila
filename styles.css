@@ -344,7 +344,12 @@ a:hover { text-decoration: underline; }
 
 .form-row { display: flex; flex-direction: column; gap: 16px; margin-bottom: 16px; }
 .form-row:last-child { margin-bottom: 0; }
-.form-row-2 { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 16px; }
+.form-row-2 {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 16px;
+    align-items: start;
+}
 @media (max-width: 640px) {
     .form-row-2 { grid-template-columns: 1fr; }
 }
@@ -362,6 +367,8 @@ a:hover { text-decoration: underline; }
     font-size: 0.9rem;
     font-weight: 500;
     color: #e6ebf5;
+    line-height: 1.4;
+    min-height: 1.4em;
 }
 .field-label em {
     color: var(--gold);
