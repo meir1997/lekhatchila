@@ -383,7 +383,9 @@ a:hover { text-decoration: underline; }
 .join-form input[type="tel"],
 .join-form input[type="date"],
 .join-form textarea {
+    display: block;
     width: 100%;
+    max-width: 100%;
     min-width: 0;
     box-sizing: border-box;
     padding: 12px 14px;
@@ -393,10 +395,29 @@ a:hover { text-decoration: underline; }
     color: var(--ink);
     font-family: inherit;
     font-size: 1rem;
+    line-height: normal;
     transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
     direction: rtl;
+    -webkit-appearance: none;
+    appearance: none;
 }
-.join-form input[type="date"] { font-family: var(--sans); }
+.join-form input[type="date"]::-webkit-date-and-time-value {
+    text-align: right;
+}
+.join-form input[type="date"] {
+    font-family: var(--sans);
+    height: 48px; /* Force consistent height to fix iOS date input bugs */
+    width: 100% !important;
+    min-width: 0 !important; /* iOS Safari adds -webkit-min-logical-width that overflows; reset it */
+    max-width: 100% !important;
+    display: block !important;
+    box-sizing: border-box !important;
+}
+/* Some iOS versions still expand the date input via the picker indicator — clamp it */
+.join-form input[type="date"]::-webkit-calendar-picker-indicator {
+    margin: 0;
+    padding: 0;
+}
 .join-form textarea { resize: vertical; min-height: 100px; }
 .join-form input:focus,
 .join-form textarea:focus {
