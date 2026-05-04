@@ -353,6 +353,9 @@ a:hover { text-decoration: underline; }
     display: flex;
     flex-direction: column;
     gap: 6px;
+    min-width: 0;
+    width: 100%;
+    box-sizing: border-box;
 }
 .field + .field { margin-top: 16px; }
 .field-label {
@@ -372,6 +375,8 @@ a:hover { text-decoration: underline; }
 .join-form input[type="date"],
 .join-form textarea {
     width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
     padding: 12px 14px;
     border-radius: 10px;
     border: 1px solid rgba(255, 255, 255, 0.18);
