@@ -291,6 +291,57 @@ a:hover { text-decoration: underline; }
 }
 .goals-list span { color: var(--ink-soft); }
 
+/* ---------- Inspiration / Portraits section ---------- */
+.portraits {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 36px;
+    max-width: 920px;
+    margin: 0 auto;
+}
+.portrait-card {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+.portrait-frame {
+    background: var(--bg);
+    border-radius: 18px;
+    overflow: hidden;
+    aspect-ratio: 4 / 5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--line);
+    box-shadow: 0 6px 24px rgba(20, 30, 60, 0.06);
+    margin-bottom: 22px;
+    transition: transform 0.25s, box-shadow 0.25s;
+}
+.portrait-card:hover .portrait-frame {
+    transform: translateY(-4px);
+    box-shadow: 0 14px 36px rgba(20, 30, 60, 0.12);
+}
+.portrait-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+}
+.portrait-body { max-width: 380px; margin: 0 auto; }
+.portrait-body h3 {
+    font-family: var(--serif);
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+.portrait-dates {
+    font-size: 0.85rem;
+    letter-spacing: 0.05em;
+    color: var(--gold);
+    margin-bottom: 14px;
+}
+.portrait-body p { font-size: 0.98rem; line-height: 1.7; }
+
 /* ---------- Join form ---------- */
 .join-container { max-width: 920px; margin: 0 auto; }
 .join-head { text-align: center; margin-bottom: 48px; }
