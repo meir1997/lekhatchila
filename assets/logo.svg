@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" fill="none" stroke="#0e2a47" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <!-- Ground line that extends past the arch on both sides -->
+  <path d="M6 50 H22" />
+  <path d="M42 50 H58" />
+  <!-- Arch: opens upward, sits on the ground line -->
+  <path d="M22 50 V32 a10 10 0 0 1 20 0 V50" />
+  <!-- Gold dot accent at the threshold -->
+  <circle cx="32" cy="50" r="1.6" fill="#b8924a" stroke="none" />
+</svg>
