@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 140" width="320" height="140">
+  <style>
+    .wm { font-family: "Frank Ruhl Libre", Georgia, serif; font-weight: 900; font-size: 64px; fill: #0e2a47; }
+    .sub { font-family: "Heebo", system-ui, sans-serif; font-weight: 500; font-size: 14px; fill: #4a5568; letter-spacing: 0.08em; }
+  </style>
+  <text x="160" y="70" class="wm" text-anchor="middle" direction="rtl">לכתחילה</text>
+  <line x1="120" y1="86" x2="200" y2="86" stroke="#b8924a" stroke-width="2" stroke-linecap="round"/>
+  <text x="160" y="112" class="sub" text-anchor="middle" direction="rtl">תנועה לחרדיות ממלכתית</text>
+</svg>

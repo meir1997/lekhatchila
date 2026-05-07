@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 220" width="280" height="220">
+  <style>
+    .wm { font-family: "Frank Ruhl Libre", Georgia, serif; font-weight: 900; font-size: 56px; fill: #0e2a47; }
+    .sub { font-family: "Heebo", system-ui, sans-serif; font-weight: 500; font-size: 13px; fill: #4a5568; letter-spacing: 0.06em; }
+  </style>
+  <!-- Arch icon centered on top -->
+  <g transform="translate(110 18)" fill="none" stroke="#0e2a47" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M2 60 H18"/>
+    <path d="M42 60 H58"/>
+    <path d="M18 60 V36 a12 13 0 0 1 24 0 V60"/>
+    <circle cx="30" cy="60" r="2.4" fill="#b8924a" stroke="none"/>
+  </g>
+  <!-- Wordmark centered -->
+  <text x="140" y="148" class="wm" text-anchor="middle" direction="rtl">לכתחילה</text>
+  <text x="140" y="178" class="sub" text-anchor="middle" direction="rtl">תנועה לחרדיות ממלכתית</text>
+  <!-- Subtle gold underline -->
+  <line x1="120" y1="158" x2="160" y2="158" stroke="#b8924a" stroke-width="1.5" stroke-linecap="round"/>
+</svg>

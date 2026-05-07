@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 96" width="320" height="96">
+  <style>
+    .wm { font-family: "Frank Ruhl Libre", Georgia, serif; font-weight: 900; font-size: 44px; fill: #0e2a47; }
+    .sub { font-family: "Heebo", system-ui, sans-serif; font-weight: 500; font-size: 11px; fill: #4a5568; letter-spacing: 0.05em; }
+  </style>
+  <!-- Arch icon on the right (RTL: brand icon goes right of text in nav) -->
+  <g transform="translate(264 16)" fill="none" stroke="#0e2a47" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M2 60 H18"/>
+    <path d="M42 60 H58"/>
+    <path d="M18 60 V38 a12 12 0 0 1 24 0 V60"/>
+    <circle cx="30" cy="60" r="2" fill="#b8924a" stroke="none"/>
+  </g>
+  <!-- Hebrew wordmark -->
+  <text x="246" y="50" class="wm" text-anchor="end" direction="rtl">לכתחילה</text>
+  <text x="246" y="72" class="sub" text-anchor="end" direction="rtl">תנועה לחרדיות ממלכתית</text>
+</svg>
