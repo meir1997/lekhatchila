@@ -320,16 +320,18 @@ a:hover { text-decoration: underline; }
     text-align: center;
 }
 .portrait-frame {
-    background: var(--bg);
+    background: #ffffff;
     border-radius: 18px;
     overflow: hidden;
-    aspect-ratio: 4 / 5;
+    aspect-ratio: 141 / 200; /* matches the source artwork exactly */
+    width: 100%;
+    max-width: 360px;
+    margin: 0 auto 22px;
     display: flex;
     align-items: center;
     justify-content: center;
     border: 1px solid var(--line);
     box-shadow: 0 6px 24px rgba(20, 30, 60, 0.06);
-    margin-bottom: 22px;
     transition: transform 0.25s, box-shadow 0.25s;
 }
 .portrait-card:hover .portrait-frame {
