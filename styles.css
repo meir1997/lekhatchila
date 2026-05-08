@@ -320,17 +320,18 @@ a:hover { text-decoration: underline; }
     text-align: center;
 }
 .portrait-frame {
-    background: #ffffff;
+    /* Portraits are transparent PNGs — sit on the site's cream so the navy linework reads beautifully */
+    background: var(--bg);
     border-radius: 18px;
     overflow: hidden;
     aspect-ratio: 141 / 200; /* matches the source artwork exactly */
     width: 100%;
-    max-width: 360px;
+    max-width: 320px;
     margin: 0 auto 22px;
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 1px solid var(--line);
+    border: 1px solid rgba(184, 146, 74, 0.25); /* subtle warm-gold outline */
     box-shadow: 0 6px 24px rgba(20, 30, 60, 0.06);
     transition: transform 0.25s, box-shadow 0.25s;
 }
