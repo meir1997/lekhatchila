@@ -115,21 +115,30 @@
                                 </div>
                             </fieldset>
 
-                            <fieldset class="form-group">
-                                <legend>התחומים שחשובים לי</legend>
-                                <div class="checkbox-group checkbox-group-3" role="group">
-                                    <label class="check"><input type="checkbox" name="entry.1727193585" value="חינוך"><span>חינוך</span></label>
-                                    <label class="check"><input type="checkbox" name="entry.1727193585" value="תעסוקה"><span>תעסוקה</span></label>
-                                    <label class="check"><input type="checkbox" name="entry.1727193585" value="השכלה"><span>השכלה</span></label>
-                                    <label class="check"><input type="checkbox" name="entry.1727193585" value="מעמד האישה"><span>מעמד האישה</span></label>
-                                    <label class="check"><input type="checkbox" name="entry.1727193585" value="צדק ושוויון"><span>צדק ושוויון</span></label>
-                                    <label class="check"><input type="checkbox" name="entry.1727193585" value="מאבק בשחיתות"><span>מאבק בשחיתות</span></label>
-                                    <label class="check"><input type="checkbox" name="entry.1727193585" value="מאבק באפליה"><span>מאבק באפליה</span></label>
-                                    <label class="check"><input type="checkbox" name="entry.1727193585" value="תקשורת"><span>תקשורת</span></label>
-                                    <label class="check"><input type="checkbox" name="entry.1727193585" value="דת ומדינה"><span>דת ומדינה</span></label>
-                                    <label class="check"><input type="checkbox" name="entry.1727193585" value="דיאלוג עם החברה הישראלית"><span>דיאלוג עם החברה הישראלית</span></label>
-                                    <label class="check"><input type="checkbox" name="entry.1727193585" value="אזרחות חרדית"><span>אזרחות חרדית</span></label>
+                            <fieldset class="form-group" id="topicsGroup">
+                                <legend>התחומים שחשובים לי <em class="legend-hint">(בחרו 3 ויותר)</em></legend>
+                                <div class="checkbox-group checkbox-group-3" role="group" data-min="3">
+                                    <label class="check"><input type="checkbox" name="entry.1727193585" value="חינוך (ליב&quot;ה, ממ&quot;ח, ישיבות תיכוניות וכיו&quot;ב)"><span>חינוך <small>(ליב״ה, ממ״ח, ישיבות תיכוניות וכיו״ב)</small></span></label>
+                                    <label class="check"><input type="checkbox" name="entry.1727193585" value="קידום תעסוקה"><span>קידום תעסוקה</span></label>
+                                    <label class="check"><input type="checkbox" name="entry.1727193585" value="קידום השכלה גבוהה"><span>קידום השכלה גבוהה</span></label>
+                                    <label class="check"><input type="checkbox" name="entry.1727193585" value="שירות צבאי ו/או אזרחי (מסלולים מותאמים, ישיבות הסדר, מכינות וכיו&quot;ב)"><span>שירות צבאי ו/או אזרחי <small>(מסלולים מותאמים, ישיבות הסדר, מכינות וכיו״ב)</small></span></label>
+                                    <label class="check"><input type="checkbox" name="entry.1727193585" value="ייצוג שוויוני לנשים"><span>ייצוג שוויוני לנשים</span></label>
+                                    <label class="check"><input type="checkbox" name="entry.1727193585" value="מנהל תקין, מאבק בשחיתות"><span>מנהל תקין, מאבק בשחיתות</span></label>
+                                    <label class="check"><input type="checkbox" name="entry.1727193585" value="מאבק באפליה ובגזענות"><span>מאבק באפליה ובגזענות</span></label>
+                                    <label class="check"><input type="checkbox" name="entry.1727193585" value="ייצוג של החרדיות הממלכתית (אידיאולוגיה, זהות, קהילה, קול)"><span>ייצוג של החרדיות הממלכתית <small>(אידיאולוגיה, זהות, קהילה, קול)</small></span></label>
+                                    <label class="check"><input type="checkbox" name="entry.1727193585" value="מעמד החרדים העובדים"><span>מעמד החרדים העובדים</span></label>
+                                    <label class="check"><input type="checkbox" name="entry.1727193585" value="ענייני דת ומדינה"><span>ענייני דת ומדינה</span></label>
+                                    <label class="check"><input type="checkbox" name="entry.1727193585" value="הסדרת חוק הגיוס ומעמד בני הישיבות"><span>הסדרת חוק הגיוס ומעמד בני הישיבות</span></label>
+                                    <label class="check"><input type="checkbox" name="entry.1727193585" value="שיפור היחסים בין החרדים לחברה הישראלית"><span>שיפור היחסים בין החרדים לחברה הישראלית</span></label>
+                                    <label class="check"><input type="checkbox" name="entry.1727193585" value="קידוש ה' / מניעת חילול ה'"><span>קידוש ה׳ / מניעת חילול ה׳</span></label>
+                                    <label class="check"><input type="checkbox" name="entry.1727193585" value="דאגה לדור החרדי הצעיר"><span>דאגה לדור החרדי הצעיר</span></label>
+                                    <label class="check"><input type="checkbox" name="entry.1727193585" value="הקמת ופיתוח קהילות לחרדים ממלכתיים"><span>הקמת ופיתוח קהילות לחרדים ממלכתיים</span></label>
                                 </div>
+                                <label class="field other-topic-field">
+                                    <span class="field-label">תחום נוסף שחשוב לי (לא חובה)</span>
+                                    <input type="text" name="other_topic" autocomplete="off" placeholder="כתבו כאן תחום שלא הופיע ברשימה">
+                                </label>
+                                <p class="topics-error" role="alert" aria-live="polite" hidden>יש לבחור לפחות 3 תחומים.</p>
                             </fieldset>
 
                             <fieldset class="form-group">

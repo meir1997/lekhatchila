@@ -599,8 +599,42 @@ a:hover { text-decoration: underline; }
     margin-top: 4px;
 }
 .checkbox-group-3 {
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    align-items: stretch;
 }
+.checkbox-group-3 .check {
+    align-items: flex-start;
+    line-height: 1.4;
+    padding: 12px 14px;
+}
+.checkbox-group-3 .check span small {
+    display: block;
+    font-size: 0.78rem;
+    opacity: 0.78;
+    margin-top: 2px;
+    font-weight: 400;
+}
+
+.legend-hint {
+    font-style: normal;
+    font-weight: 400;
+    color: #cfd6e3;
+    font-size: 0.85rem;
+    margin-inline-start: 6px;
+}
+
+.other-topic-field { margin-top: 18px; }
+
+.topics-error {
+    margin: 12px 0 0;
+    padding: 10px 14px;
+    border-radius: 8px;
+    background: rgba(245, 96, 96, 0.15);
+    border: 1px solid rgba(245, 96, 96, 0.45);
+    color: #ffb3b3;
+    font-size: 0.92rem;
+}
+.has-error .checkbox-group-3 { box-shadow: 0 0 0 2px rgba(245, 96, 96, 0.25); border-radius: 12px; }
 
 .check {
     display: flex;

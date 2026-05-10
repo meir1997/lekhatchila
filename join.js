@@ -16,16 +16,45 @@ if (yearEl) yearEl.textContent = new Date().getFullYear();
     const thanksView = document.getElementById('thanksView');
     const thanksName = document.getElementById('thanksName');
 
+    const TOPICS_ENTRY = 'entry.1727193585';
+    const NOTES_ENTRY  = 'entry.1150363751';
+    const topicsGroup = document.getElementById('topicsGroup');
+    const topicsError = topicsGroup ? topicsGroup.querySelector('.topics-error') : null;
+
+    function validateTopics() {
+        if (!topicsGroup) return true;
+        const checked = topicsGroup.querySelectorAll('input[name="' + TOPICS_ENTRY + '"]:checked').length;
+        const ok = checked >= 3;
+        if (topicsError) topicsError.hidden = ok;
+        topicsGroup.classList.toggle('has-error', !ok);
+        return ok;
+    }
+
+    // Live-clear error when user reaches 3
+    if (topicsGroup) {
+        topicsGroup.addEventListener('change', (ev) => {
+            if (ev.target && ev.target.name === TOPICS_ENTRY) {
+                if (!topicsError.hidden) validateTopics();
+            }
+        });
+    }
+
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
         if (!form.checkValidity()) {
             form.reportValidity();
             return;
         }
+        if (!validateTopics()) {
+            topicsGroup.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            return;
+        }
 
         const body = new URLSearchParams();
         const formData = new FormData(form);
         let firstName = '';
+        let otherTopic = '';
+        let userNotes = '';
         for (const [name, value] of formData.entries()) {
             if (!value) continue;
             if (name === 'birthdate') {
@@ -37,9 +66,16 @@ if (yearEl) yearEl.textContent = new Date().getFullYear();
                 }
                 continue;
             }
+            if (name === 'other_topic') { otherTopic = String(value).trim(); continue; }
+            if (name === NOTES_ENTRY)   { userNotes  = String(value).trim(); continue; }
             if (name === 'entry.1166605822') firstName = String(value).trim();
             body.append(name, value);
         }
+        // Merge "other topic" into the notes field (Google Form has no dedicated entry for it yet)
+        const mergedNotes = otherTopic
+            ? (userNotes ? `תחום נוסף שחשוב לי: ${otherTopic}\n\n${userNotes}` : `תחום נוסף שחשוב לי: ${otherTopic}`)
+            : userNotes;
+        if (mergedNotes) body.append(NOTES_ENTRY, mergedNotes);
 
         submitBtn.disabled = true;
         const labelEl = submitBtn.querySelector('.btn-label');
