@@ -12,7 +12,7 @@
     --radius: 14px;
     --max: 1140px;
     --serif: "Frank Ruhl Libre", Georgia, "Times New Roman", serif;
-    --sans: "Heebo", system-ui, -apple-system, "Segoe UI", Tahoma, sans-serif;
+    --sans: "Assistant", "Heebo", system-ui, -apple-system, "Segoe UI", Tahoma, sans-serif;
 }
 
 * { box-sizing: border-box; }
