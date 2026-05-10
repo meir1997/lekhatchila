@@ -306,6 +306,47 @@ a:hover { text-decoration: underline; }
 }
 .goals-list span { color: var(--ink-soft); }
 
+/* ---------- Mission / Challenge ---------- */
+.challenge-container { max-width: 720px; margin: 0 auto; text-align: center; }
+.challenge-stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    margin: 8px auto 36px;
+    padding: 28px 32px;
+    border-top: 1px solid rgba(184, 146, 74, 0.4);
+    border-bottom: 1px solid rgba(184, 146, 74, 0.4);
+    max-width: 420px;
+}
+.stat-number {
+    font-family: var(--serif);
+    font-size: clamp(3rem, 7vw, 4.5rem);
+    font-weight: 900;
+    line-height: 1;
+    color: var(--gold);
+    letter-spacing: -0.01em;
+}
+.stat-label {
+    font-size: 1rem;
+    color: var(--ink-soft);
+    letter-spacing: 0.02em;
+}
+.challenge-text {
+    font-size: 1.12rem;
+    line-height: 1.85;
+    color: var(--ink);
+    margin: 0 0 22px;
+}
+.challenge-mission {
+    font-family: var(--serif);
+    font-size: clamp(1.4rem, 2.5vw, 1.75rem);
+    color: var(--ink);
+    margin: 30px 0 0;
+    line-height: 1.4;
+}
+.challenge-mission strong { font-weight: 700; }
+
 /* ---------- About / Who we are ---------- */
 .about-container { max-width: 720px; margin: 0 auto; text-align: center; }
 .about-text {
