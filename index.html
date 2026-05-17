@@ -34,8 +34,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@400;500;700;900&family=Assistant:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css?v=3">
+    <link rel="stylesheet" href="a11y.css">
 </head>
 <body>
+    <a href="#top" class="skip-link">דלג לתוכן הראשי</a>
     <header class="site-header">
         <nav class="nav-container">
             <a href="#top" class="brand">
@@ -59,7 +61,7 @@
         </nav>
     </header>
 
-    <main id="top">
+    <main id="top" tabindex="-1">
         <section class="hero">
             <div class="hero-inner">
                 <h1>לכתחילה</h1>
@@ -319,6 +321,7 @@
             </div>
             <div class="footer-meta">
                 <span>© <span id="year"></span> לכתחילה</span>
+                <span><a href="negishut.html">הצהרת נגישות</a></span>
             </div>
         </div>
     </footer>

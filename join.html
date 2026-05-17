@@ -21,8 +21,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@400;500;700;900&family=Assistant:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css?v=3">
+    <link rel="stylesheet" href="a11y.css">
 </head>
 <body class="join-page">
+    <a href="#main-content" class="skip-link">דלג לתוכן הראשי</a>
     <header class="site-header">
         <nav class="nav-container">
             <a href="/" class="brand">
@@ -41,7 +43,7 @@
         </nav>
     </header>
 
-    <main class="join-main">
+    <main class="join-main" id="main-content" tabindex="-1">
         <section class="section section-dark join-section">
             <div class="container join-container">
                 <div id="formView">
@@ -216,6 +218,7 @@
             </div>
             <div class="footer-meta">
                 <span>© <span id="year"></span> לכתחילה</span>
+                <span><a href="negishut.html">הצהרת נגישות</a></span>
             </div>
         </div>
     </footer>
