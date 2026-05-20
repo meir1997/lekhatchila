@@ -78,7 +78,9 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
 .a11y-panel-footer a{color:#1a1a2e;font-weight:700;text-decoration:underline}
 
 /* ===== Body effects ===== */
-body.a11y-grayscale{filter:grayscale(1)}
+/* Grayscale: apply to direct children of body EXCEPT the widget,
+   so the widget stays in color and visible. */
+body.a11y-grayscale > *:not(#a11y-widget){filter:grayscale(1)}
 
 body.a11y-contrast{background:#000 !important;color:#ff0 !important}
 body.a11y-contrast *:not(#a11y-widget):not(#a11y-widget *){
@@ -86,7 +88,8 @@ body.a11y-contrast *:not(#a11y-widget):not(#a11y-widget *){
   border-color:#ff0 !important;box-shadow:none !important;
 }
 body.a11y-contrast a:not(#a11y-widget a){color:#0ff !important;text-decoration:underline !important}
-body.a11y-contrast img,body.a11y-contrast video{filter:grayscale(1) contrast(1.4) !important}
+body.a11y-contrast :not(#a11y-widget):not(#a11y-widget *) img,
+body.a11y-contrast :not(#a11y-widget):not(#a11y-widget *) video{filter:grayscale(1) contrast(1.4) !important}
 
 body.a11y-links a:not(#a11y-widget a){
   text-decoration:underline !important;
