@@ -80,10 +80,23 @@
             letter-spacing: 0.02em;
         }
 
-        .main-content {
-            max-width: 800px;
+        /* Two column layout */
+        .document-container {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 40px;
+            max-width: 1200px;
             margin: 60px auto 100px;
             padding: 0 24px;
+            align-items: start;
+        }
+
+        @media (max-width: 1024px) {
+            .document-container {
+                grid-template-columns: 1fr;
+                gap: 40px;
+                margin: 40px auto 60px;
+            }
         }
 
         .document-card {
@@ -91,7 +104,7 @@
             border: 1px solid var(--line);
             border-radius: var(--radius);
             box-shadow: var(--shadow);
-            padding: 60px 50px;
+            padding: 50px 40px;
             position: relative;
             overflow: hidden;
         }
@@ -99,7 +112,6 @@
         @media (max-width: 640px) {
             .document-card {
                 padding: 40px 24px;
-                margin-top: 30px;
             }
             body {
                 font-size: 17px;
@@ -118,9 +130,9 @@
 
         .doc-header {
             text-align: center;
-            margin-bottom: 40px;
+            margin-bottom: 35px;
             border-bottom: 1px solid var(--line);
-            padding-bottom: 30px;
+            padding-bottom: 25px;
         }
 
         .kicker {
@@ -135,11 +147,11 @@
 
         h1 {
             font-family: var(--serif);
-            font-size: clamp(1.8rem, 4vw, 2.6rem);
+            font-size: clamp(1.6rem, 3.5vw, 2.3rem);
             font-weight: 900;
             color: var(--bg-dark);
             margin: 0 0 16px;
-            line-height: 1.2;
+            line-height: 1.25;
         }
 
         .meta-date {
@@ -170,13 +182,180 @@
         .highlight-verse {
             background-color: var(--bg);
             border-right: 4px solid var(--gold);
-            padding: 16px 24px;
-            margin: 28px 0;
+            padding: 14px 20px;
+            margin: 24px 0;
             font-family: var(--serif);
-            font-size: 1.2rem;
+            font-size: 1.15rem;
             font-weight: 500;
             color: var(--bg-dark);
             border-radius: 0 var(--radius) var(--radius) 0;
+        }
+
+        /* Signing Form Card */
+        .signing-card {
+            background: var(--bg-light);
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 40px 30px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .signing-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 0;
+            left: 0;
+            height: 4px;
+            background: var(--gold);
+        }
+
+        .signing-card h2 {
+            font-family: var(--serif);
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--bg-dark);
+            margin: 0 0 12px;
+        }
+
+        .signing-lead {
+            font-size: 0.95rem;
+            color: var(--ink-soft);
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .field {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            margin-bottom: 20px;
+        }
+
+        .field-label {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--ink-soft);
+        }
+
+        .field-label em {
+            color: var(--gold);
+            font-style: normal;
+            margin-inline-start: 2px;
+        }
+
+        .signing-card input[type="text"],
+        .signing-card input[type="email"] {
+            display: block;
+            width: 100%;
+            padding: 12px 14px;
+            border-radius: 10px;
+            border: 1px solid var(--line);
+            background: var(--bg);
+            color: var(--ink);
+            font-family: inherit;
+            font-size: 1rem;
+            transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+            direction: rtl;
+        }
+
+        .signing-card input:focus {
+            outline: none;
+            border-color: var(--gold);
+            box-shadow: 0 0 0 3px rgba(184, 146, 74, 0.2);
+            background: var(--bg-light);
+        }
+
+        .btn-submit {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            width: 100%;
+            padding: 14px;
+            border: 0;
+            border-radius: 999px;
+            background: var(--gold);
+            color: var(--bg-dark);
+            font-size: 1.05rem;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 8px 24px rgba(184, 146, 74, 0.2);
+            transition: transform 0.15s, box-shadow 0.2s, background 0.2s;
+            font-family: inherit;
+            margin-top: 10px;
+        }
+
+        .btn-submit:hover:not(:disabled) {
+            background: #d2a85a;
+            transform: translateY(-1px);
+            box-shadow: 0 12px 28px rgba(184, 146, 74, 0.35);
+        }
+
+        .btn-submit:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+
+        .btn-submit .btn-arrow {
+            display: inline-block;
+            transition: transform 0.2s;
+            font-size: 1.2em;
+        }
+
+        .btn-submit:hover:not(:disabled) .btn-arrow {
+            transform: translateX(-4px);
+        }
+
+        .form-status {
+            margin: 14px 0 0;
+            font-size: 0.9rem;
+            text-align: center;
+            min-height: 1.4em;
+        }
+
+        .form-status.is-error {
+            color: #e53e3e;
+        }
+
+        /* Thanks view */
+        .thanks-view {
+            text-align: center;
+            padding: 40px 10px;
+            animation: thanksFade 0.5s ease both;
+        }
+
+        @keyframes thanksFade {
+            from { opacity: 0; transform: translateY(12px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        .thanks-icon {
+            color: var(--gold);
+            margin-bottom: 24px;
+        }
+
+        .thanks-title {
+            font-family: var(--serif);
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--bg-dark);
+            margin: 0 0 12px;
+        }
+
+        .thanks-lead {
+            font-size: 1.1rem;
+            color: var(--ink);
+            margin: 0 0 8px;
+            font-weight: 600;
+        }
+
+        .thanks-sub {
+            font-size: 0.95rem;
+            color: var(--ink-soft);
+            margin: 0;
         }
 
         .footer {
@@ -201,49 +380,157 @@
         </div>
     </header>
 
-    <main class="main-content">
-        <article class="document-card">
-            <header class="doc-header">
-                <span class="kicker">גילוי דעת ועצומה</span>
-                <h1>עצומה נגד אלימות בשם התורה ובכלל</h1>
-                <p class="meta-date">פורסם בתאריך: י״ז בסיוון ה׳תשפ״ו (04.06.2026)</p>
-            </header>
+    <div class="document-container">
+        
+        <!-- Right Column: Petition Text -->
+        <main>
+            <article class="document-card">
+                <header class="doc-header">
+                    <span class="kicker">גילוי דעת ועצומה</span>
+                    <h1>עצומה נגד אלימות בשם התורה ובכלל</h1>
+                    <p class="meta-date">פורסם בתאריך: י״ז בסיוון ה׳תשפ״ו (04.06.2026)</p>
+                </header>
 
-            <div class="doc-body">
-                <p>אנו, החתומים והחתומות מטה, בני ובנות תורה ויראי שמיים, מביעים התנגדות נחרצת לכל גילוי של אלימות – פיזית או מילולית – בתוך הציבור החרדי, ובפרט כאשר היא נעשית כביכול בשם התורה ולומדיה.</p>
+                <div class="doc-body">
+                    <p>אנו, החתומים והחתומות מטה, בני ובנות תורה ויראי שמיים, מביעים התנגדות נחרצת לכל גילוי של אלימות – פיזית או מילולית – בתוך הציבור החרדי, ובפרט כאשר היא נעשית כביכול בשם התורה ולומדיה.</p>
 
-                <p>דרכה של תורה אינה דרך של כוח ואלימות, אלא דרך של קדושה, יראת שמיים, מוסר ושלום. כבר לימדונו רבותינו כי כוחו של עם ישראל אינו אלא בפיו ובתפילתו:</p>
-                
-                <div class="highlight-verse">
-                    "תולעת יעקב אין כוחה אלא בפה"
+                    <p>דרכה של תורה אינה דרך של כוח ואלימות, אלא דרך של קדושה, יראת שמיים, מוסר ושלום. כבר לימדונו רבותינו כי כוחו של עם ישראל אינו אלא בפיו ובתפילתו:</p>
+                    
+                    <div class="highlight-verse">
+                        "תולעת יעקב אין כוחה אלא בפה"
+                    </div>
+
+                    <p>אנו מתפללים, מוחים ומביעים עמדה – אך רק בדרכי נועם, בכבוד הבריות ובדרך ארץ הראויה לבני ובנות תורה. כל אלימות – במעשה או בדיבור פוגעני – איננה דרך התורה, איננה דרך המוסר ואיננה דרך של יראת שמיים.</p>
+
+                    <p>דרכיהם של פורעי הסדר והאלימות אינן דרכינו. אנו דוחים אותן בתוקף וקוראים להפסקה מיידית של כל מעשה כזה.</p>
+
+                    <p>כפי שאמר וכתב אחד מתלמידי גדולי הדור הקודם, רבי משה שינפלד זצ"ל:</p>
+                    
+                    <div class="highlight-verse">
+                        "האלימות זמורת זר במחננו"
+                    </div>
+
+                    <p>אנו מדגישים בפני החברה הישראלית כולה כי מעשים אלו אינם מייצגים את עולם התורה, אינם מייצגים את הציבור החרדי, ואינם חלק מאיתנו.</p>
+
+                    <p>הדבר חמור במיוחד כאשר הוא מופנה כלפי סמלי שלטון ומוסדות המדינה, שעליהם נאמר:</p>
+                    
+                    <div class="highlight-verse">
+                        "אלמלא מוראה של מלכות, איש את רעהו חיים בלעו"
+                    </div>
+
+                    <p>אנו קוראים לחיזוק דרך התורה האמיתית – דרך של קדושה, אחריות, כבוד הדדי ויראת שמיים, ולהסרת כל גילוי של אלימות מן השיח הציבורי.</p>
                 </div>
+            </article>
+        </main>
 
-                <p>אנו מתפללים, מוחים ומביעים עמדה – אך רק בדרכי נועם, בכבוד הבריות ובדרך ארץ הראויה לבני ובנות תורה. כל אלימות – במעשה או בדיבור פוגעני – איננה דרך התורה, איננה דרך המוסר ואיננה דרך של יראת שמיים.</p>
-
-                <p>דרכיהם של פורעי הסדר והאלימות אינן דרכינו. אנו דוחים אותן בתוקף וקוראים להפסקה מיידית של כל מעשה כזה.</p>
-
-                <p>כפי שאמר וכתב אחד מתלמידי גדולי הדור הקודם, רבי משה שינפלד זצ"ל:</p>
+        <!-- Left Column: Signing Form -->
+        <aside class="signing-card">
+            <div id="formView">
+                <h2>חתימה על העצומה</h2>
+                <p class="signing-lead">הוסיפו את שמכם לעצומה נגד אלימות ולשמירה על כבוד התורה.</p>
                 
-                <div class="highlight-verse">
-                    "האלימות זמורת זר במחננו"
-                </div>
-
-                <p>אנו מדגישים בפני החברה הישראלית כולה כי מעשים אלו אינם מייצגים את עולם התורה, אינם מייצגים את הציבור החרדי, ואינם חלק מאיתנו.</p>
-
-                <p>הדבר חמור במיוחד כאשר הוא מופנה כלפי סמלי שלטון ומוסדות המדינה, שעליהם נאמר:</p>
-                
-                <div class="highlight-verse">
-                    "אלמלא מוראה של מלכות, איש את רעהו חיים בלעו"
-                </div>
-
-                <p>אנו קוראים לחיזוק דרך התורה האמיתית – דרך של קדושה, אחריות, כבוד הדדי ויראת שמיים, ולהסרת כל גילוי של אלימות מן השיח הציבורי.</p>
+                <form id="signForm" novalidate>
+                    <div class="field">
+                        <label for="fullName" class="field-label">שם מלא <em>*</em></label>
+                        <input type="text" id="fullName" name="fullName" required placeholder="ישראל ישראלי" autocomplete="name">
+                    </div>
+                    
+                    <div class="field">
+                        <label for="email" class="field-label">דואר אלקטרוני <em>*</em></label>
+                        <input type="email" id="email" name="email" required placeholder="name@example.com" autocomplete="email">
+                    </div>
+                    
+                    <div class="field">
+                        <label for="city" class="field-label">ישוב מגורים <em>*</em></label>
+                        <input type="text" id="city" name="city" required placeholder="ירושלים" autocomplete="address-level2">
+                    </div>
+                    
+                    <button type="submit" class="btn-submit">
+                        <span class="btn-label">חתימה על העצומה</span>
+                        <span class="btn-arrow" aria-hidden="true">←</span>
+                    </button>
+                    <p class="form-status" role="status" aria-live="polite"></p>
+                </form>
             </div>
-        </article>
-    </main>
+            
+            <div id="thanksView" class="thanks-view" hidden>
+                <div class="thanks-icon" aria-hidden="true">
+                    <svg viewBox="0 0 64 64" width="64" height="64" fill="none" stroke="currentColor">
+                        <circle cx="32" cy="32" r="30" stroke-width="3"/>
+                        <path d="M20 33 L29 42 L46 24" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+                <h2 class="thanks-title">תודה רבה!</h2>
+                <p class="thanks-lead">חתימתך נוספה לעצומה בהצלחה.</p>
+                <p class="thanks-sub">ביחד אנו מחזקים את דרך התורה והשלום.</p>
+            </div>
+        </aside>
+
+    </div>
 
     <footer class="footer">
         <div>© תנועת לכתחילה</div>
     </footer>
 
+    <script>
+        (function() {
+            const form = document.getElementById('signForm');
+            if (!form) return;
+
+            // ==========================================
+            // הגדרות חיבור ל-GOOGLE SHEETS (APPS SCRIPT)
+            // ==========================================
+            const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbx0zqJSmu0cjyrLrblD458uRMkYmBs-0Q8KkLqMKnFTZWARfgUse5WfHf86RelZu3C6/exec';
+            // ==========================================
+
+            const status = form.querySelector('.form-status');
+            const submitBtn = form.querySelector('.btn-submit');
+            const labelEl = submitBtn.querySelector('.btn-label');
+            const formView = document.getElementById('formView');
+            const thanksView = document.getElementById('thanksView');
+
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+
+                // בדיקת תקינות מקומית
+                if (!form.checkValidity()) {
+                    form.reportValidity();
+                    return;
+                }
+
+                // יצירת גוף הבקשה
+                const body = new URLSearchParams();
+                body.append('name', document.getElementById('fullName').value.trim());
+                body.append('email', document.getElementById('email').value.trim());
+                body.append('city', document.getElementById('city').value.trim());
+
+                // נטרול הכפתור והצגת טעינה
+                submitBtn.disabled = true;
+                const originalLabel = labelEl.textContent;
+                labelEl.textContent = 'שולח...';
+                status.className = 'form-status';
+                status.textContent = '';
+
+                try {
+                    await fetch(WEB_APP_URL, {
+                        method: 'POST',
+                        mode: 'no-cors',
+                        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                        body: body.toString(),
+                    });
+                    
+                    // מעבר למסך תודה
+                    formView.hidden = true;
+                    thanksView.hidden = false;
+                } catch (err) {
+                    console.error('Form submission failed', err);
+                    status.className = 'form-status is-error';
+                    status.textContent = 'אירעה שגיאה בשליחת החתימה. נסו שוב.';
+                    submitBtn.disabled = false;
+                    labelEl.textContent = originalLabel;
+                }
+            });
+        })();
+    </script>
 </body>
 </html>
