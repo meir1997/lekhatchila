@@ -227,6 +227,53 @@
             line-height: 1.6;
         }
 
+        /* Goal Meter Styles */
+        .goal-meter-container {
+            margin-bottom: 25px;
+            padding: 15px 20px;
+            background: var(--bg);
+            border: 1px solid var(--line);
+            border-radius: 10px;
+        }
+
+        .goal-meter-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.95rem;
+            margin-bottom: 8px;
+        }
+
+        .goal-current {
+            color: var(--ink);
+        }
+
+        .goal-current strong {
+            font-size: 1.25rem;
+            color: var(--gold);
+        }
+
+        .goal-target {
+            color: var(--ink-soft);
+            font-weight: 600;
+        }
+
+        .progress-bar-wrap {
+            width: 100%;
+            height: 10px;
+            background: var(--line);
+            border-radius: 99px;
+            overflow: hidden;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--gold) 0%, #d2a85a 100%);
+            border-radius: 99px;
+            transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            width: 0%;
+        }
+
         .field {
             display: flex;
             flex-direction: column;
@@ -428,6 +475,17 @@
             <div id="formView">
                 <h2>חתימה על העצומה</h2>
                 <p class="signing-lead">הוסיפו את שמכם לעצומה נגד אלימות ולשמירה על כבוד התורה.</p>
+
+                <!-- מדד חתימות (Goal Meter) -->
+                <div class="goal-meter-container">
+                    <div class="goal-meter-header">
+                        <span class="goal-current"><strong id="sigCount">39</strong> חתמו</span>
+                        <span class="goal-target">יעד: 100 חתימות</span>
+                    </div>
+                    <div class="progress-bar-wrap">
+                        <div class="progress-bar-fill" id="progressBarFill"></div>
+                    </div>
+                </div>
                 
                 <form id="signForm" novalidate>
                     <div class="field">
@@ -489,6 +547,44 @@
             const formView = document.getElementById('formView');
             const thanksView = document.getElementById('thanksView');
 
+            // ==========================================
+            // לוגיקת מדד החתימות
+            // ==========================================
+            const GOAL = 100;
+            const BASE_COUNT = 39;
+            let currentCount = BASE_COUNT;
+
+            const sigCountEl = document.getElementById('sigCount');
+            const progressBarFill = document.getElementById('progressBarFill');
+
+            function updateCounter(count) {
+                currentCount = count;
+                sigCountEl.textContent = currentCount;
+                const percentage = Math.min((currentCount / GOAL) * 100, 100);
+                progressBarFill.style.width = percentage + '%';
+            }
+
+            // טעינת מספר החתימות האמיתי מהשרת (GET request)
+            async function fetchSignaturesCount() {
+                try {
+                    const res = await fetch(WEB_APP_URL);
+                    if (res.ok) {
+                        const data = await res.json();
+                        if (data && typeof data.count === 'number') {
+                            updateCounter(data.count);
+                        }
+                    }
+                } catch (err) {
+                    console.warn('Could not fetch real-time signature count, using default base.', err);
+                    updateCounter(BASE_COUNT);
+                }
+            }
+
+            // הפעלה ראשונית
+            updateCounter(BASE_COUNT);
+            fetchSignaturesCount();
+            // ==========================================
+
             form.addEventListener('submit', async (e) => {
                 e.preventDefault();
 
@@ -522,6 +618,9 @@
                     // מעבר למסך תודה
                     formView.hidden = true;
                     thanksView.hidden = false;
+
+                    // עדכון המונה באופן מקומי
+                    updateCounter(currentCount + 1);
                 } catch (err) {
                     console.error('Form submission failed', err);
                     status.className = 'form-status is-error';
