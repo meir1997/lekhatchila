@@ -187,6 +187,48 @@
 
         .game-feedback { font-size: 1.6rem; min-height: 2.2rem; font-weight: 600; }
 
+        /* ---- matching game ---- */
+        #match { display: none; text-align: center; }
+
+        .match-board {
+            display: flex;
+            gap: 24px;
+            justify-content: center;
+            margin: 20px 0;
+        }
+
+        .match-col { display: flex; flex-direction: column; gap: 14px; }
+
+        .match-card {
+            font-family: inherit;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            min-width: 130px;
+            padding: 12px;
+            box-shadow: 0 4px 10px rgba(43, 43, 79, 0.18);
+            transition: transform 0.12s, opacity 0.3s;
+        }
+
+        .match-card:active { transform: scale(0.94); }
+        .match-card.letter { font-size: 2.6rem; font-weight: 800; color: #fff; }
+
+        .match-card.word {
+            background: #fff;
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #2b2b4f;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2px;
+        }
+
+        .match-card.word span:first-child { font-size: 2rem; }
+        .match-card.selected { outline: 4px solid #2b2b4f; transform: scale(1.05); }
+        .match-card.matched { opacity: 0.3; pointer-events: none; }
+        .match-card.wrong { animation: shake 0.4s; }
+
         .game-score {
             display: inline-block;
             margin-top: 12px;
@@ -211,6 +253,7 @@
     <div class="tabs">
         <button class="tab-btn active" id="tab-learn">📖 האותיות</button>
         <button class="tab-btn" id="tab-game">🎮 משחק</button>
+        <button class="tab-btn" id="tab-match">🧩 התאמה</button>
     </div>
 
     <main>
@@ -225,6 +268,16 @@
             <p class="game-feedback" id="gameFeedback"></p>
             <div class="game-score">נקודות: <span id="gameScore">0</span></div>
             <div class="stars" id="gameStars"></div>
+        </section>
+
+        <section id="match">
+            <p class="game-question">מתאימים אות למילה!</p>
+            <div class="match-board">
+                <div class="match-col" id="matchLetters"></div>
+                <div class="match-col" id="matchWords"></div>
+            </div>
+            <p class="game-feedback" id="matchFeedback"></p>
+            <div class="game-score">זוגות: <span id="matchScore">0</span></div>
         </section>
     </main>
 
@@ -314,24 +367,30 @@
         document.getElementById('btnClose').addEventListener('click', () => overlay.classList.remove('show'));
         overlay.addEventListener('click', e => { if (e.target === overlay) overlay.classList.remove('show'); });
 
-        /* ---- game tab ---- */
-        const learnSection = document.getElementById('learn');
-        const gameSection = document.getElementById('game');
-        const tabLearn = document.getElementById('tab-learn');
-        const tabGame = document.getElementById('tab-game');
+        /* ---- tabs ---- */
+        const sections = {
+            learn: document.getElementById('learn'),
+            game: document.getElementById('game'),
+            match: document.getElementById('match'),
+        };
+        const tabs = {
+            learn: document.getElementById('tab-learn'),
+            game: document.getElementById('tab-game'),
+            match: document.getElementById('tab-match'),
+        };
         let score = 0;
         let answer = null;
         let locked = false;
 
-        tabLearn.addEventListener('click', () => switchTab(false));
-        tabGame.addEventListener('click', () => switchTab(true));
+        Object.keys(tabs).forEach(name => tabs[name].addEventListener('click', () => switchTab(name)));
 
-        function switchTab(toGame) {
-            tabLearn.classList.toggle('active', !toGame);
-            tabGame.classList.toggle('active', toGame);
-            learnSection.style.display = toGame ? 'none' : 'block';
-            gameSection.style.display = toGame ? 'block' : 'none';
-            if (toGame) newRound();
+        function switchTab(name) {
+            Object.keys(sections).forEach(key => {
+                tabs[key].classList.toggle('active', key === name);
+                sections[key].style.display = key === name ? 'block' : 'none';
+            });
+            if (name === 'game') newRound();
+            if (name === 'match') newMatchRound();
         }
 
         function shuffle(arr) {
@@ -378,6 +437,78 @@
                 feedback.textContent = 'נסה עוד פעם 💪';
                 speak('נסה עוד פעם');
             }
+        }
+
+        /* ---- matching game ---- */
+        let matchScore = 0;
+        let matchRemaining = 0;
+        let matchSelected = { letter: null, word: null };
+
+        function newMatchRound() {
+            matchSelected = { letter: null, word: null };
+            document.getElementById('matchFeedback').textContent = '';
+            const chosen = shuffle([...LETTERS]).slice(0, 4);
+            matchRemaining = chosen.length;
+            const lettersCol = document.getElementById('matchLetters');
+            const wordsCol = document.getElementById('matchWords');
+            lettersCol.innerHTML = '';
+            wordsCol.innerHTML = '';
+            chosen.forEach((letter, i) => {
+                const btn = document.createElement('button');
+                btn.className = 'match-card letter';
+                btn.style.background = COLORS[i % COLORS.length];
+                btn.textContent = letter.glyph;
+                btn.addEventListener('click', () => selectMatch('letter', btn, letter));
+                lettersCol.appendChild(btn);
+            });
+            shuffle([...chosen]).forEach(letter => {
+                const btn = document.createElement('button');
+                btn.className = 'match-card word';
+                btn.innerHTML = `<span>${letter.emoji}</span><span>${letter.word}</span>`;
+                btn.addEventListener('click', () => selectMatch('word', btn, letter));
+                wordsCol.appendChild(btn);
+            });
+        }
+
+        function selectMatch(side, btn, letter) {
+            if (btn.classList.contains('matched')) return;
+            if (matchSelected[side]) matchSelected[side].btn.classList.remove('selected');
+            matchSelected[side] = { btn, letter };
+            btn.classList.add('selected');
+
+            const { letter: l, word: w } = matchSelected;
+            if (!l || !w) {
+                speak(side === 'letter' ? letter.name : letter.word);
+                return;
+            }
+
+            const feedback = document.getElementById('matchFeedback');
+            if (l.letter.glyph === w.letter.glyph) {
+                [l.btn, w.btn].forEach(b => {
+                    b.classList.remove('selected');
+                    b.classList.add('matched');
+                });
+                matchRemaining--;
+                matchScore++;
+                document.getElementById('matchScore').textContent = matchScore;
+                if (matchRemaining === 0) {
+                    feedback.textContent = 'מדהים אריאל! סיימת את הלוח! 🎉';
+                    speak('מדהים אריאל! סיימת את הלוח!');
+                    setTimeout(newMatchRound, 2200);
+                } else {
+                    feedback.textContent = 'יש התאמה! 🌟';
+                    speak(`${l.letter.name} כמו ${l.letter.word}. יש התאמה!`);
+                }
+            } else {
+                [l.btn, w.btn].forEach(b => {
+                    b.classList.remove('selected');
+                    b.classList.add('wrong');
+                });
+                setTimeout(() => [l.btn, w.btn].forEach(b => b.classList.remove('wrong')), 450);
+                feedback.textContent = 'נסה עוד פעם 💪';
+                speak('נסה עוד פעם');
+            }
+            matchSelected = { letter: null, word: null };
         }
     </script>
 </body>
