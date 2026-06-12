@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>שאלון אבחון למנהל מוסד חינוכי — לכתחילה</title>
+    <meta name="description" content="שאלון אבחון עצמי למנהלי מוסדות חינוך: בדקו תוך חמש דקות האם תוכנית הליווי של לכתחילה מתאימה למוסד שלכם.">
+    <link rel="icon" type="image/svg+xml" href="assets/logo.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@400;500;700;900&family=Assistant:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #fbfaf6;
+            --bg-light: #ffffff;
+            --bg-dark: #0e2a47;
+            --ink: #1a1a1a;
+            --ink-soft: #374151;
+            --gold: #b8924a;
+            --line: #e6e2d6;
+            --shadow: 0 10px 40px rgba(20, 30, 60, 0.05);
+            --radius: 16px;
+            --serif: "Frank Ruhl Libre", Georgia, "Times New Roman", serif;
+            --sans: "Assistant", "Heebo", system-ui, -apple-system, sans-serif;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: var(--sans);
+            color: var(--ink);
+            background-color: var(--bg);
+            line-height: 1.8;
+            font-size: 18px;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .header {
+            background: rgba(251, 250, 246, 0.92);
+            border-bottom: 1px solid var(--line);
+            padding: 18px 24px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .brand { display: flex; align-items: center; gap: 12px; user-select: none; text-decoration: none; }
+        .brand-mark { width: 44px; height: 44px; }
+        .brand-text { display: flex; flex-direction: column; }
+        .brand-name { font-family: var(--serif); font-size: 1.6rem; font-weight: 900; color: var(--ink); line-height: 1.1; }
+        .brand-sub { font-size: 0.8rem; color: var(--ink-soft); margin-top: 2px; letter-spacing: 0.02em; }
+
+        .page-container {
+            max-width: 780px;
+            margin: 50px auto 100px;
+            padding: 0 24px;
+        }
+
+        .card {
+            background: var(--bg-light);
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 50px 44px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: "";
+            position: absolute;
+            top: 0; right: 0; left: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--gold) 0%, #d2a85a 50%, var(--gold) 100%);
+        }
+
+        @media (max-width: 640px) {
+            .card { padding: 36px 22px; }
+            body { font-size: 17px; }
+            .page-container { margin: 28px auto 60px; }
+        }
+
+        .kicker {
+            display: inline-block;
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            color: var(--gold);
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+
+        h1 {
+            font-family: var(--serif);
+            font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+            font-weight: 900;
+            color: var(--bg-dark);
+            margin: 0 0 16px;
+            line-height: 1.3;
+        }
+
+        h2 {
+            font-family: var(--serif);
+            font-size: 1.45rem;
+            font-weight: 700;
+            color: var(--bg-dark);
+            margin: 0 0 6px;
+        }
+
+        .lead { color: var(--ink-soft); margin: 0 0 14px; }
+
+        .intro-points {
+            margin: 24px 0;
+            padding: 0;
+            list-style: none;
+            display: grid;
+            gap: 10px;
+        }
+
+        .intro-points li {
+            display: flex;
+            gap: 10px;
+            align-items: baseline;
+            color: var(--ink-soft);
+        }
+
+        .intro-points li::before {
+            content: "✓";
+            color: var(--gold);
+            font-weight: 800;
+            flex-shrink: 0;
+        }
+
+        .discreet-note {
+            background-color: var(--bg);
+            border-right: 4px solid var(--gold);
+            padding: 12px 18px;
+            margin: 24px 0;
+            font-size: 0.95rem;
+            color: var(--ink-soft);
+            border-radius: 0 var(--radius) var(--radius) 0;
+        }
+
+        /* Progress */
+        .progress-zone { margin-bottom: 28px; }
+
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            color: var(--ink-soft);
+            margin-bottom: 6px;
+        }
+
+        .progress-track {
+            width: 100%;
+            height: 8px;
+            background: var(--line);
+            border-radius: 99px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--gold) 0%, #d2a85a 100%);
+            border-radius: 99px;
+            transition: width 0.4s ease;
+            width: 0%;
+        }
+
+        .dim-intro {
+            font-size: 0.95rem;
+            color: var(--ink-soft);
+            margin: 0 0 26px;
+        }
+
+        /* Likert statement */
+        .statement {
+            padding: 20px 0;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .statement:last-of-type { border-bottom: none; }
+
+        .statement-text {
+            font-weight: 600;
+            color: var(--ink);
+            margin: 0 0 14px;
+        }
+
+        .likert {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 6px;
+        }
+
+        .likert label {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .likert input { position: absolute; opacity: 0; pointer-events: none; }
+
+        .likert .opt {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 2px;
+            border: 1px solid var(--line);
+            border-radius: 10px;
+            background: var(--bg);
+            padding: 9px 4px 7px;
+            text-align: center;
+            transition: border-color 0.15s, background 0.15s, box-shadow 0.15s;
+            min-height: 58px;
+        }
+
+        .likert .opt .num { font-weight: 800; font-size: 1.05rem; color: var(--bg-dark); line-height: 1.2; }
+        .likert .opt .cap { font-size: 0.68rem; color: var(--ink-soft); line-height: 1.25; }
+
+        .likert input:checked + .opt {
+            border-color: var(--gold);
+            background: #fdf6ea;
+            box-shadow: 0 0 0 2px rgba(184, 146, 74, 0.25);
+        }
+
+        .likert input:focus-visible + .opt {
+            outline: 2px solid var(--bg-dark);
+            outline-offset: 2px;
+        }
+
+        @media (max-width: 520px) {
+            .likert { gap: 4px; }
+            .likert .opt .cap { display: none; }
+            .likert .opt { min-height: 42px; padding: 7px 2px; }
+        }
+
+        .step-error {
+            color: #e53e3e;
+            font-size: 0.9rem;
+            text-align: center;
+            min-height: 1.5em;
+            margin: 14px 0 0;
+        }
+
+        /* Background fields */
+        .field { display: flex; flex-direction: column; gap: 6px; margin-bottom: 20px; }
+        .field-label { font-size: 0.9rem; font-weight: 600; color: var(--ink-soft); }
+        .field-label em { color: var(--gold); font-style: normal; margin-inline-start: 2px; }
+
+        input[type="text"], input[type="email"], input[type="tel"], select, textarea {
+            display: block;
+            width: 100%;
+            padding: 12px 14px;
+            border-radius: 10px;
+            border: 1px solid var(--line);
+            background: var(--bg);
+            color: var(--ink);
+            font-family: inherit;
+            font-size: 1rem;
+            transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+            direction: rtl;
+        }
+
+        textarea { resize: vertical; min-height: 90px; }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--gold);
+            box-shadow: 0 0 0 3px rgba(184, 146, 74, 0.2);
+            background: var(--bg-light);
+        }
+
+        /* Buttons */
+        .btn-row {
+            display: flex;
+            gap: 12px;
+            margin-top: 28px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 13px 28px;
+            border: 0;
+            border-radius: 999px;
+            font-size: 1.02rem;
+            font-weight: 700;
+            cursor: pointer;
+            font-family: inherit;
+            transition: transform 0.15s, box-shadow 0.2s, background 0.2s;
+        }
+
+        .btn-primary {
+            background: var(--gold);
+            color: var(--bg-dark);
+            box-shadow: 0 8px 24px rgba(184, 146, 74, 0.2);
+            flex: 1;
+        }
+
+        .btn-primary:hover:not(:disabled) {
+            background: #d2a85a;
+            transform: translateY(-1px);
+            box-shadow: 0 12px 28px rgba(184, 146, 74, 0.35);
+        }
+
+        .btn-primary:disabled { opacity: 0.7; cursor: not-allowed; }
+
+        .btn-ghost {
+            background: transparent;
+            color: var(--ink-soft);
+            border: 1px solid var(--line);
+        }
+
+        .btn-ghost:hover { border-color: var(--gold); color: var(--ink); }
+
+        /* Results */
+        .verdict-badge {
+            display: inline-block;
+            background: #fdf6ea;
+            border: 1px solid var(--gold);
+            color: var(--bg-dark);
+            font-family: var(--serif);
+            font-size: 1.3rem;
+            font-weight: 700;
+            border-radius: 999px;
+            padding: 8px 26px;
+            margin: 8px 0 18px;
+        }
+
+        .verdict-text { color: var(--ink-soft); margin: 0 0 30px; }
+
+        .dim-result { margin-bottom: 18px; }
+
+        .dim-result-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            font-size: 0.95rem;
+            margin-bottom: 5px;
+        }
+
+        .dim-result-name { font-weight: 600; color: var(--ink); }
+        .dim-result-tag { font-size: 0.8rem; font-weight: 700; }
+        .dim-result-tag.strong { color: #2f7d4f; }
+        .dim-result-tag.mid { color: var(--gold); }
+        .dim-result-tag.weak { color: #b4541e; }
+
+        .dim-bar-track {
+            width: 100%;
+            height: 9px;
+            background: var(--line);
+            border-radius: 99px;
+            overflow: hidden;
+        }
+
+        .dim-bar-fill {
+            height: 100%;
+            border-radius: 99px;
+            background: linear-gradient(90deg, var(--gold) 0%, #d2a85a 100%);
+            transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .result-note {
+            background-color: var(--bg);
+            border-right: 4px solid var(--gold);
+            padding: 14px 20px;
+            margin: 28px 0;
+            border-radius: 0 var(--radius) var(--radius) 0;
+            color: var(--ink-soft);
+            font-size: 0.98rem;
+        }
+
+        .contact-divider {
+            border: none;
+            border-top: 1px solid var(--line);
+            margin: 34px 0 28px;
+        }
+
+        .form-status {
+            margin: 14px 0 0;
+            font-size: 0.9rem;
+            text-align: center;
+            min-height: 1.4em;
+        }
+
+        .form-status.is-error { color: #e53e3e; }
+
+        /* Thanks */
+        .thanks-view { text-align: center; padding: 30px 10px; animation: fadeUp 0.5s ease both; }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(12px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        .thanks-icon { color: var(--gold); margin-bottom: 20px; }
+        .thanks-title { font-family: var(--serif); font-size: 1.9rem; font-weight: 700; color: var(--bg-dark); margin: 0 0 12px; }
+        .thanks-sub { color: var(--ink-soft); margin: 0; }
+
+        .footer {
+            text-align: center;
+            padding: 40px 24px;
+            border-top: 1px solid var(--line);
+            color: #718096;
+            font-size: 0.9rem;
+            background-color: var(--bg-light);
+        }
+
+        [hidden] { display: none !important; }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <a href="index.html" class="brand">
+            <img src="assets/logo.svg" class="brand-mark" alt="" aria-hidden="true">
+            <div class="brand-text">
+                <span class="brand-name">לכתחילה</span>
+                <span class="brand-sub">תנועה לחרדיות ממלכתית</span>
+            </div>
+        </a>
+    </header>
+
+    <div class="page-container">
+        <div class="card">
+
+            <!-- Intro -->
+            <section id="introView">
+                <span class="kicker">אבחון עצמי למנהלים</span>
+                <h1>האם תוכנית הליווי שלנו מתאימה למוסד שלכם?</h1>
+                <p class="lead">
+                    שאלון אבחון קצר, בנוי על פי המתודולוגיה המקובלת בייעוץ ארגוני — ומותאם
+                    למוסדות חינוך בציבור החרדי. השאלון ממפה את מצב המוסד בשישה ממדים
+                    ובסופו תקבלו תמונת מצב והמלצה אישית.
+                </p>
+                <ul class="intro-points">
+                    <li>כ־5 דקות, 24 היגדים קצרים ושאלות רקע</li>
+                    <li>שישה ממדים: חזון ומנהיגות, צוות, אקלים חינוכי, הורים וקהילה, ניהול ותהליכים, ומוכנות לתהליך</li>
+                    <li>תוצאה מיידית עם מיפוי חוזקות ותחומים לחיזוק</li>
+                </ul>
+                <div class="discreet-note">
+                    השאלון דיסקרטי. התשובות אינן נשמרות ואינן נשלחות לאיש — אלא אם תבחרו
+                    בסוף התהליך להשאיר פרטים ולשתף אותנו בתמונת המצב.
+                </div>
+                <div class="btn-row">
+                    <button type="button" class="btn btn-primary" id="btnStart">
+                        להתחלת האבחון <span aria-hidden="true">←</span>
+                    </button>
+                </div>
+            </section>
+
+            <!-- Background -->
+            <section id="bgView" hidden>
+                <div class="progress-zone">
+                    <div class="progress-label"><span>שאלות רקע</span><span id="bgProgressText">שלב 1 מתוך 7</span></div>
+                    <div class="progress-track"><div class="progress-fill" id="bgProgressFill" style="width: 14%"></div></div>
+                </div>
+                <h2>קצת על המוסד</h2>
+                <p class="dim-intro">הפרטים האלו עוזרים לנו לפרש את התוצאות נכון. אין צורך בשמות בשלב הזה.</p>
+
+                <div class="field">
+                    <label class="field-label" for="bgType">סוג המוסד <em>*</em></label>
+                    <select id="bgType" required>
+                        <option value="" selected disabled>בחרו סוג מוסד</option>
+                        <option>תלמוד תורה / חיידר</option>
+                        <option>בית ספר יסודי</option>
+                        <option>ישיבה קטנה</option>
+                        <option>ישיבה גדולה</option>
+                        <option>בית יעקב / בית ספר לבנות</option>
+                        <option>סמינר</option>
+                        <option>אחר</option>
+                    </select>
+                </div>
+
+                <div class="field">
+                    <label class="field-label" for="bgSize">מספר התלמידים במוסד <em>*</em></label>
+                    <select id="bgSize" required>
+                        <option value="" selected disabled>בחרו טווח</option>
+                        <option>עד 100</option>
+                        <option>100–250</option>
+                        <option>250–500</option>
+                        <option>מעל 500</option>
+                    </select>
+                </div>
+
+                <div class="field">
+                    <label class="field-label" for="bgYears">ותק שלכם בתפקיד הניהול <em>*</em></label>
+                    <select id="bgYears" required>
+                        <option value="" selected disabled>בחרו ותק</option>
+                        <option>עד שנתיים</option>
+                        <option>2–5 שנים</option>
+                        <option>5–10 שנים</option>
+                        <option>מעל 10 שנים</option>
+                    </select>
+                </div>
+
+                <p class="step-error" id="bgError" role="alert"></p>
+                <div class="btn-row">
+                    <button type="button" class="btn btn-ghost" data-nav="back">חזרה</button>
+                    <button type="button" class="btn btn-primary" id="btnBgNext">המשך <span aria-hidden="true">←</span></button>
+                </div>
+            </section>
+
+            <!-- Dimension steps (rendered by JS) -->
+            <section id="quizView" hidden>
+                <div class="progress-zone">
+                    <div class="progress-label"><span id="dimTitleSmall"></span><span id="quizProgressText"></span></div>
+                    <div class="progress-track"><div class="progress-fill" id="quizProgressFill"></div></div>
+                </div>
+                <h2 id="dimTitle"></h2>
+                <p class="dim-intro">עד כמה כל היגד מתאר את המצב אצלכם כיום? (1 = כלל לא, 5 = במידה רבה מאוד)</p>
+                <div id="statementsBox"></div>
+                <p class="step-error" id="quizError" role="alert"></p>
+                <div class="btn-row">
+                    <button type="button" class="btn btn-ghost" id="btnQuizBack">חזרה</button>
+                    <button type="button" class="btn btn-primary" id="btnQuizNext"></button>
+                </div>
+            </section>
+
+            <!-- Results -->
+            <section id="resultView" hidden>
+                <span class="kicker">תמונת מצב</span>
+                <h1 style="margin-bottom: 4px;">תוצאות האבחון</h1>
+                <div class="verdict-badge" id="verdictBadge"></div>
+                <p class="verdict-text" id="verdictText"></p>
+
+                <div id="dimResults"></div>
+
+                <div class="result-note" id="resultNote"></div>
+
+                <hr class="contact-divider">
+
+                <div id="contactFormView">
+                    <h2>נשמח להכיר</h2>
+                    <p class="dim-intro">
+                        השאירו פרטים ונחזור אליכם לשיחת היכרות ללא התחייבות. תמונת המצב
+                        מהאבחון תצורף לפנייה כדי שהשיחה תהיה ממוקדת.
+                    </p>
+                    <form id="contactForm" novalidate>
+                        <div class="field">
+                            <label class="field-label" for="cName">שם מלא <em>*</em></label>
+                            <input type="text" id="cName" required placeholder="ישראל ישראלי" autocomplete="name">
+                        </div>
+                        <div class="field">
+                            <label class="field-label" for="cInstitution">שם המוסד <em>*</em></label>
+                            <input type="text" id="cInstitution" required placeholder="תלמוד תורה...">
+                        </div>
+                        <div class="field">
+                            <label class="field-label" for="cCity">ישוב <em>*</em></label>
+                            <input type="text" id="cCity" required placeholder="ירושלים" autocomplete="address-level2">
+                        </div>
+                        <div class="field">
+                            <label class="field-label" for="cPhone">טלפון <em>*</em></label>
+                            <input type="tel" id="cPhone" required placeholder="050-0000000" autocomplete="tel">
+                        </div>
+                        <div class="field">
+                            <label class="field-label" for="cEmail">דואר אלקטרוני</label>
+                            <input type="email" id="cEmail" placeholder="name@example.com" autocomplete="email">
+                        </div>
+                        <div class="field">
+                            <label class="field-label" for="cNotes">משהו שחשוב לכם שנדע (לא חובה)</label>
+                            <textarea id="cNotes" placeholder="אתגר מרכזי, רקע, שאלות..."></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="width: 100%;">
+                            <span class="btn-label">שליחת הפרטים ותמונת המצב</span>
+                            <span aria-hidden="true">←</span>
+                        </button>
+                        <p class="form-status" role="status" aria-live="polite"></p>
+                    </form>
+                </div>
+
+                <div id="thanksView" class="thanks-view" hidden>
+                    <div class="thanks-icon" aria-hidden="true">
+                        <svg viewBox="0 0 64 64" width="64" height="64" fill="none" stroke="currentColor">
+                            <circle cx="32" cy="32" r="30" stroke-width="3"/>
+                            <path d="M20 33 L29 42 L46 24" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <h2 class="thanks-title">הפרטים נשלחו, תודה!</h2>
+                    <p class="thanks-sub">נחזור אליכם בהקדם לתיאום שיחת היכרות.</p>
+                </div>
+            </section>
+
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div>© תנועת לכתחילה</div>
+    </footer>
+
+    <script>
+        (function () {
+            'use strict';
+
+            // ==========================================================
+            // הגדרות שליחה: אם מוגדרת כתובת Apps Script — הפרטים יישלחו
+            // אליה (כמו בעצומה). אם ריק — תיפתח טיוטת מייל עם הסיכום.
+            // ==========================================================
+            const WEB_APP_URL = '';
+            const FALLBACK_EMAIL = 'meir.cohen1997@gmail.com';
+            // ==========================================================
+
+            const LIKERT_CAPTIONS = ['כלל לא', 'במידה מועטה', 'באופן חלקי', 'במידה רבה', 'רבה מאוד'];
+
+            const DIMENSIONS = [
+                {
+                    key: 'vision',
+                    title: 'חזון ומנהיגות חינוכית',
+                    statements: [
+                        'למוסד שלנו יש חזון חינוכי ברור, והצוות מכיר אותו ויודע לנסח אותו',
+                        'החלטות חשובות מתקבלות אצלנו מתוך תפיסה חינוכית סדורה, ולא רק בתגובה לאירועים',
+                        'אני מצליח להקדיש זמן קבוע לחשיבה ולתכנון לטווח ארוך, ולא רק ל"כיבוי שריפות"',
+                        'הצוות יודע מה מצופה ממנו ולאן המוסד שואף להגיע בשנים הקרובות',
+                    ],
+                },
+                {
+                    key: 'staff',
+                    title: 'צוות חינוכי והון אנושי',
+                    statements: [
+                        'המלמדים והמורים אצלנו מקבלים ליווי והדרכה מקצועית באופן שוטף',
+                        'יש לנו דרך מסודרת לקלוט איש צוות חדש ולחנוך אותו בשנה הראשונה',
+                        'אני מקיים שיחה אישית מסודרת עם כל איש צוות לפחות פעם בשנה',
+                        'אנשי הצוות משתפים אותי בקשיים בכיתה בשלב מוקדם, לפני שהם הופכים למשבר',
+                    ],
+                },
+                {
+                    key: 'climate',
+                    title: 'אקלים חינוכי ותלמידים',
+                    statements: [
+                        'יש לנו מענה סדור לתלמידים מתקשים — גם בלימודים וגם ברגש',
+                        'המשמעת אצלנו מושגת בדרכי נועם, בלי פגיעה בכבודו של תלמיד',
+                        'אנחנו מזהים מוקדם תלמידים שנמצאים בסיכון לנשירה ופועלים בעניינם',
+                        'רוב התלמידים אצלנו מגיעים למוסד בשמחה',
+                    ],
+                },
+                {
+                    key: 'parents',
+                    title: 'הורים וקהילה',
+                    statements: [
+                        'הקשר שלנו עם ההורים שוטף ויזום, לא רק כשמתעוררת בעיה',
+                        'אני יודע להציב גבול מכבד ללחצים מבחוץ כשטובת התלמידים דורשת זאת',
+                        'הורים רואים בנו כתובת אמינה לשיתוף גם בקשיים חינוכיים שבבית',
+                        'יש אמון יציב בין המוסד לקהילה שסביבו',
+                    ],
+                },
+                {
+                    key: 'management',
+                    title: 'ניהול, שגרות ותהליכים',
+                    statements: [
+                        'יש לנו שגרות עבודה מסודרות: ישיבות צוות קבועות, מעקב פדגוגי ותיעוד',
+                        'אני יודע בכל רגע נתון מה מצב התקציב ומה צפוי עד סוף השנה',
+                        'התפקידים והסמכויות בצוות הניהול מוגדרים וברורים לכולם',
+                        'כשמתעורר משבר — יש לנו דרך מסודרת לטפל בו ולהפיק ממנו לקחים',
+                    ],
+                },
+                {
+                    key: 'readiness',
+                    title: 'מוכנות לתהליך ליווי',
+                    isReadiness: true,
+                    statements: [
+                        'אני פתוח לקבל מבט חיצוני ומקצועי על המוסד, גם כשהוא מאתגר אותי',
+                        'הצוות שלי מסוגל לאמץ דרכי עבודה חדשות כשמסבירים לו את הערך שבהן',
+                        'אוכל להקדיש זמן קבוע לתהליך ליווי לאורך שנת לימודים',
+                        'יש לי גיבוי מהבעלות או מההנהלה הרוחנית לקדם שיפורים במוסד',
+                    ],
+                },
+            ];
+
+            const TOTAL_STEPS = DIMENSIONS.length + 1; // background + dimensions
+
+            const answers = DIMENSIONS.map(d => d.statements.map(() => 0));
+            let dimIndex = 0;
+
+            const views = {
+                intro: document.getElementById('introView'),
+                bg: document.getElementById('bgView'),
+                quiz: document.getElementById('quizView'),
+                result: document.getElementById('resultView'),
+            };
+
+            function show(name) {
+                Object.keys(views).forEach(k => { views[k].hidden = k !== name; });
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+
+            /* ---------- navigation ---------- */
+            document.getElementById('btnStart').addEventListener('click', () => show('bg'));
+            document.querySelector('#bgView [data-nav="back"]').addEventListener('click', () => show('intro'));
+
+            document.getElementById('btnBgNext').addEventListener('click', () => {
+                const missing = ['bgType', 'bgSize', 'bgYears'].some(id => !document.getElementById(id).value);
+                const err = document.getElementById('bgError');
+                if (missing) {
+                    err.textContent = 'נא למלא את כל שאלות הרקע לפני ההמשך.';
+                    return;
+                }
+                err.textContent = '';
+                dimIndex = 0;
+                renderDimension();
+                show('quiz');
+            });
+
+            document.getElementById('btnQuizBack').addEventListener('click', () => {
+                if (dimIndex === 0) { show('bg'); return; }
+                dimIndex--;
+                renderDimension();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+
+            document.getElementById('btnQuizNext').addEventListener('click', () => {
+                const err = document.getElementById('quizError');
+                const unanswered = answers[dimIndex].findIndex(v => v === 0);
+                if (unanswered !== -1) {
+                    err.textContent = 'נא לענות על כל ההיגדים בעמוד זה.';
+                    const el = document.querySelectorAll('#statementsBox .statement')[unanswered];
+                    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    return;
+                }
+                err.textContent = '';
+                if (dimIndex < DIMENSIONS.length - 1) {
+                    dimIndex++;
+                    renderDimension();
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                } else {
+                    renderResults();
+                    show('result');
+                }
+            });
+
+            /* ---------- dimension rendering ---------- */
+            function renderDimension() {
+                const dim = DIMENSIONS[dimIndex];
+                const stepNum = dimIndex + 2; // step 1 is background
+                document.getElementById('dimTitle').textContent = dim.title;
+                document.getElementById('dimTitleSmall').textContent = 'ממד ' + (dimIndex + 1) + ' מתוך ' + DIMENSIONS.length;
+                document.getElementById('quizProgressText').textContent = 'שלב ' + stepNum + ' מתוך ' + TOTAL_STEPS;
+                document.getElementById('quizProgressFill').style.width = Math.round((stepNum / TOTAL_STEPS) * 100) + '%';
+                document.getElementById('btnQuizNext').innerHTML = dimIndex === DIMENSIONS.length - 1
+                    ? 'לצפייה בתוצאות <span aria-hidden="true">←</span>'
+                    : 'המשך <span aria-hidden="true">←</span>';
+
+                const box = document.getElementById('statementsBox');
+                box.innerHTML = '';
+                dim.statements.forEach((text, qi) => {
+                    const wrap = document.createElement('div');
+                    wrap.className = 'statement';
+                    const p = document.createElement('p');
+                    p.className = 'statement-text';
+                    p.textContent = text;
+                    wrap.appendChild(p);
+
+                    const fieldset = document.createElement('div');
+                    fieldset.className = 'likert';
+                    fieldset.setAttribute('role', 'radiogroup');
+                    fieldset.setAttribute('aria-label', text);
+                    for (let v = 1; v <= 5; v++) {
+                        const label = document.createElement('label');
+                        const input = document.createElement('input');
+                        input.type = 'radio';
+                        input.name = 'q_' + dimIndex + '_' + qi;
+                        input.value = v;
+                        if (answers[dimIndex][qi] === v) input.checked = true;
+                        input.addEventListener('change', () => {
+                            answers[dimIndex][qi] = v;
+                            document.getElementById('quizError').textContent = '';
+                        });
+                        const opt = document.createElement('span');
+                        opt.className = 'opt';
+                        opt.innerHTML = '<span class="num">' + v + '</span><span class="cap">' + LIKERT_CAPTIONS[v - 1] + '</span>';
+                        label.appendChild(input);
+                        label.appendChild(opt);
+                        fieldset.appendChild(label);
+                    }
+                    wrap.appendChild(fieldset);
+                    box.appendChild(wrap);
+                });
+            }
+
+            /* ---------- scoring & results ---------- */
+            function avg(arr) { return arr.reduce((a, b) => a + b, 0) / arr.length; }
+
+            function computeScores() {
+                const dims = DIMENSIONS.map((d, i) => ({
+                    key: d.key,
+                    title: d.title,
+                    isReadiness: !!d.isReadiness,
+                    score: avg(answers[i]),
+                }));
+                const stateDims = dims.filter(d => !d.isReadiness);
+                return {
+                    dims,
+                    stateAvg: avg(stateDims.map(d => d.score)),
+                    readiness: dims.find(d => d.isReadiness).score,
+                };
+            }
+
+            function verdictFor(s) {
+                const readyHigh = s.readiness >= 3.5;
+                const stateLow = s.stateAvg < 3.5;
+                if (readyHigh && stateLow) return {
+                    badge: 'התאמה גבוהה לליווי',
+                    text: 'האבחון מצביע על פערים אמיתיים בחלק מהממדים, לצד פתיחות ומוכנות שלכם לתהליך. זה בדיוק השילוב שבו ליווי מקצועי מביא את הערך הגדול ביותר — יש על מה לעבוד, ויש עם מי.',
+                };
+                if (readyHigh && !stateLow) return {
+                    badge: 'מוסד מבוסס — ליווי למצוינות',
+                    text: 'המוסד שלכם נמצא במצב טוב ברוב הממדים, ויש לכם פתיחות לתהליך. ליווי במצב כזה מתמקד במינוף החוזקות, בביסוס שגרות לטווח ארוך ובקפיצת מדרגה — ממוסד מתפקד למוסד מצטיין.',
+                };
+                if (!readyHigh && stateLow) return {
+                    badge: 'מומלצת שיחת היכרות',
+                    text: 'האבחון מזהה פערים שראוי לטפל בהם, אך תהליך ליווי דורש פניות וגיבוי — ושם התמונה פחות חד־משמעית. שווה לקיים שיחת היכרות כדי להבין יחד מה התהליך דורש, ואיך אפשר להתאים אותו למציאות שלכם.',
+                };
+                return {
+                    badge: 'אין צורך מיידי בליווי מלא',
+                    text: 'המוסד שלכם נמצא במצב טוב ברוב הממדים. ייתכן שתהליך ליווי מלא אינו נחוץ כרגע, ודי בייעוץ נקודתי בתחום מסוים. נשמח לעמוד לרשותכם אם תרצו מבט חיצוני על נושא ממוקד.',
+                };
+            }
+
+            function tagFor(score) {
+                if (score >= 4) return { cls: 'strong', label: 'חוזקה' };
+                if (score >= 3) return { cls: 'mid', label: 'בסיס טוב' };
+                return { cls: 'weak', label: 'תחום לחיזוק' };
+            }
+
+            function renderResults() {
+                const s = computeScores();
+                const v = verdictFor(s);
+                document.getElementById('verdictBadge').textContent = v.badge;
+                document.getElementById('verdictText').textContent = v.text;
+
+                const box = document.getElementById('dimResults');
+                box.innerHTML = '';
+                s.dims.forEach(d => {
+                    const tag = tagFor(d.score);
+                    const row = document.createElement('div');
+                    row.className = 'dim-result';
+                    row.innerHTML =
+                        '<div class="dim-result-head">' +
+                            '<span class="dim-result-name">' + d.title + '</span>' +
+                            '<span class="dim-result-tag ' + tag.cls + '">' + tag.label + ' · ' + d.score.toFixed(1) + '/5</span>' +
+                        '</div>' +
+                        '<div class="dim-bar-track"><div class="dim-bar-fill" style="width:0%"></div></div>';
+                    box.appendChild(row);
+                    requestAnimationFrame(() => {
+                        row.querySelector('.dim-bar-fill').style.width = Math.round((d.score / 5) * 100) + '%';
+                    });
+                });
+
+                const stateDims = s.dims.filter(d => !d.isReadiness);
+                const weakest = stateDims.reduce((a, b) => (b.score < a.score ? b : a));
+                const strongest = stateDims.reduce((a, b) => (b.score > a.score ? b : a));
+                document.getElementById('resultNote').innerHTML =
+                    '<strong>בקצרה:</strong> הממד החזק ביותר אצלכם הוא <strong>' + strongest.title + '</strong>, ' +
+                    'והממד שהכי כדאי להשקיע בו הוא <strong>' + weakest.title + '</strong>. ' +
+                    'באבחון עצמי התמונה תמיד חלקית — שיחה אחת איתנו תחדד אותה.';
+            }
+
+            /* ---------- summary & submission ---------- */
+            function buildSummary() {
+                const s = computeScores();
+                const v = verdictFor(s);
+                const lines = [];
+                lines.push('— תמונת מצב מאבחון עצמי באתר לכתחילה —');
+                lines.push('');
+                lines.push('סוג מוסד: ' + document.getElementById('bgType').value);
+                lines.push('מספר תלמידים: ' + document.getElementById('bgSize').value);
+                lines.push('ותק בניהול: ' + document.getElementById('bgYears').value);
+                lines.push('');
+                s.dims.forEach(d => lines.push(d.title + ': ' + d.score.toFixed(1) + '/5'));
+                lines.push('');
+                lines.push('סיכום: ' + v.badge);
+                return lines.join('\n');
+            }
+
+            const contactForm = document.getElementById('contactForm');
+            contactForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                if (!contactForm.checkValidity()) {
+                    contactForm.reportValidity();
+                    return;
+                }
+
+                const status = contactForm.querySelector('.form-status');
+                const submitBtn = contactForm.querySelector('button[type="submit"]');
+                const labelEl = submitBtn.querySelector('.btn-label');
+
+                const details = {
+                    name: document.getElementById('cName').value.trim(),
+                    institution: document.getElementById('cInstitution').value.trim(),
+                    city: document.getElementById('cCity').value.trim(),
+                    phone: document.getElementById('cPhone').value.trim(),
+                    email: document.getElementById('cEmail').value.trim(),
+                    notes: document.getElementById('cNotes').value.trim(),
+                    summary: buildSummary(),
+                };
+
+                if (WEB_APP_URL) {
+                    submitBtn.disabled = true;
+                    const originalLabel = labelEl.textContent;
+                    labelEl.textContent = 'שולח...';
+                    status.className = 'form-status';
+                    status.textContent = '';
+                    try {
+                        const body = new URLSearchParams(details);
+                        await fetch(WEB_APP_URL, {
+                            method: 'POST',
+                            mode: 'no-cors',
+                            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                            body: body.toString(),
+                        });
+                        showThanks();
+                    } catch (err) {
+                        console.error('Form submission failed', err);
+                        status.className = 'form-status is-error';
+                        status.textContent = 'אירעה שגיאה בשליחה. נסו שוב.';
+                        submitBtn.disabled = false;
+                        labelEl.textContent = originalLabel;
+                    }
+                    return;
+                }
+
+                // ללא שרת מוגדר — פתיחת טיוטת מייל מוכנה עם כל הפרטים
+                const bodyText =
+                    'שם: ' + details.name + '\n' +
+                    'מוסד: ' + details.institution + '\n' +
+                    'ישוב: ' + details.city + '\n' +
+                    'טלפון: ' + details.phone + '\n' +
+                    (details.email ? 'דוא"ל: ' + details.email + '\n' : '') +
+                    (details.notes ? '\nהערות:\n' + details.notes + '\n' : '') +
+                    '\n' + details.summary;
+                const mailto = 'mailto:' + FALLBACK_EMAIL +
+                    '?subject=' + encodeURIComponent('פנייה משאלון אבחון למנהלים — ' + details.institution) +
+                    '&body=' + encodeURIComponent(bodyText);
+                window.location.href = mailto;
+                showThanks();
+            });
+
+            function showThanks() {
+                document.getElementById('contactFormView').hidden = true;
+                document.getElementById('thanksView').hidden = false;
+            }
+        })();
+    </script>
+</body>
+</html>
