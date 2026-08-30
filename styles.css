@@ -6,7 +6,7 @@
     --ink-soft: #4a5568;
     --accent: #1d4ed8;
     --accent-soft: #e0e7ff;
-    --gold: #b8924a;
+    --gold: #80601c;
     --line: #e6e2d6;
     --shadow: 0 6px 30px rgba(20, 30, 60, 0.08);
     --radius: 14px;
@@ -707,7 +707,7 @@ a:hover { text-decoration: underline; }
     border: 0;
     border-radius: 999px;
     background: var(--gold);
-    color: #0a1d33;
+    color: #ffffff;
     font-size: 1.05rem;
     font-weight: 700;
     cursor: pointer;
@@ -716,7 +716,7 @@ a:hover { text-decoration: underline; }
     font-family: inherit;
 }
 .btn-join:hover:not(:disabled) {
-    background: #d2a85a;
+    background: #6a4f16;
     transform: translateY(-2px);
     box-shadow: 0 14px 34px rgba(184, 146, 74, 0.5);
     text-decoration: none;
@@ -760,7 +760,7 @@ a:hover { text-decoration: underline; }
     padding: 13px 26px;
     border: 0;
     border-radius: 999px;
-    background: #25D366;
+    background: #167a45;
     color: #ffffff;
     font-family: inherit;
     font-weight: 600;
@@ -771,7 +771,7 @@ a:hover { text-decoration: underline; }
     transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
 }
 .btn-whatsapp:hover {
-    background: #1ebe57;
+    background: #126337;
     transform: translateY(-2px);
     box-shadow: 0 12px 28px rgba(37, 211, 102, 0.45);
     text-decoration: none;
@@ -863,6 +863,8 @@ a:hover { text-decoration: underline; }
 .footer-links { display: flex; gap: 24px; justify-content: center; flex-wrap: wrap; }
 .footer-links a { color: #cfd6e3; }
 .footer-links a:hover { color: white; text-decoration: none; }
+.site-footer a { color: #dce7f7; }
+.site-footer a:hover { color: #fff; }
 .footer-meta { text-align: left; font-size: 0.9rem; color: #8a93a3; }
 
 /* ---------- Responsive ---------- */
